@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { KeyboardAvoidingView, Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { ThemeContext } from '~contexts/ThemeContext';
 import { GlobalStyles } from '~utils/styles';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface IContainerProps {
     children: React.ReactNode;
@@ -12,12 +13,16 @@ const Container = ({ children }: IContainerProps) => {
         themeApp: { colors },
         theme,
     } = useContext(ThemeContext);
-    // const { top, bottom } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
 
     return (
         <>
             <StatusBar translucent barStyle={theme !== 'dark' ? 'light-content' : 'dark-content'} />
-            <View style={[styles.container, { backgroundColor: colors.background }]}>
+            <View
+                style={[
+                    styles.container,
+                    { backgroundColor: colors.background, paddingTop: top, paddingBottom: bottom },
+                ]}>
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
                     <View style={GlobalStyles.flex1}>{children}</View>
                 </KeyboardAvoidingView>
