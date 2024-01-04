@@ -1,13 +1,13 @@
 import React from 'react';
-import { Text } from 'react-native';
 import Container from '~components/Container';
+import Header from '~components/Header';
 import { ThemeContextProvider } from '~contexts/ThemeContext';
 
 const App = () => {
     return (
         <ThemeContextProvider>
             <Container>
-                <Text>Apsdsdsdp</Text>
+                <Header title='Home' />
             </Container>
         </ThemeContextProvider>
     );

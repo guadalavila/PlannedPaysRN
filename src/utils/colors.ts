@@ -4,6 +4,7 @@ const common = {
     secondary: '#F8E16C',
     tertiary: '#FB8F67',
     background: '#EFEFEF',
+    white: '#FFFFFF',
 };
 
 const light = {
