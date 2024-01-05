@@ -21,7 +21,7 @@ export default Header;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.light.primary,
-        paddingVertical: spacing.L,
+        paddingVertical: spacing.XL,
     },
     title: {
         color: colors.light.white,
