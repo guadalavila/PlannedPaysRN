@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, View } from 'react-native';
+import Button from '~components/Button';
 import Card from '~components/Card';
 import { RootStackLoginParamList } from '~navigations/types';
 
@@ -21,6 +22,7 @@ const DashboardScreen = ({}: Props) => {
                 <Text>sdas</Text>
                 <Text>sdas</Text>
             </Card>
+            <Button onPress={() => {}} title='Press me' />
         </View>
     );
 };
