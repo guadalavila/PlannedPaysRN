@@ -5,6 +5,7 @@ export type ThemeType = {
         secondary: string;
         tertiary: string;
         background: string;
+        textPrimary: string;
     };
     typography: {
         size: {

@@ -1,10 +1,26 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, View } from 'react-native';
+import Card from '~components/Card';
+import { RootStackLoginParamList } from '~navigations/types';
 
-const DashboardScreen = () => {
+interface Props extends NativeStackScreenProps<RootStackLoginParamList, 'DashboardScreen'> {}
+
+const DashboardScreen = ({}: Props) => {
     return (
         <View>
-            <Text>DashboardScreen</Text>
+            <Card title='Tendencia de equilibrio'>
+                <Text>sdas</Text>
+                <Text>sdas</Text>
+                <Text>sdas</Text>
+                <Text>sdas</Text>
+            </Card>
+            <Card title='Gastos'>
+                <Text>sdas</Text>
+                <Text>sdas</Text>
+                <Text>sdas</Text>
+                <Text>sdas</Text>
+            </Card>
         </View>
     );
 };

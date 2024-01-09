@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from './colors';
 
 export const GlobalStyles = StyleSheet.create({
     flex1: {
@@ -35,3 +36,8 @@ export const GlobalStyles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+export const headerStyle = {
+    headerStyle: { backgroundColor: colors.light.primary },
+    headerTintColor: colors.light.white,
+};
