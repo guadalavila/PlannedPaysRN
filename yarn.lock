@@ -779,6 +779,13 @@
     "@babel/helper-plugin-utils" "^7.22.5"
     "@babel/plugin-syntax-numeric-separator" "^7.10.4"
 
+"@babel/plugin-transform-object-assign@^7.16.7":
+  version "7.23.3"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-object-assign/-/plugin-transform-object-assign-7.23.3.tgz#64177e8cf943460c7f0e1c410277546804f59625"
+  integrity sha512-TPJ6O7gVC2rlQH2hvQGRH273G1xdoloCj9Pc07Q7JbIZYDi+Sv5gaE2fu+r5E7qK4zyt6vj0FbZaZTRU5C3OMA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.22.5"
+
 "@babel/plugin-transform-object-rest-spread@^7.23.4":
   version "7.23.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-object-rest-spread/-/plugin-transform-object-rest-spread-7.23.4.tgz#2b9c2d26bf62710460bdc0d1730d4f1048361b83"
@@ -1087,7 +1094,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-typescript@^7.13.0":
+"@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.16.7":
   version "7.23.3"
   resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.23.3.tgz#14534b34ed5b6d435aa05f1ae1c5e7adcc01d913"
   integrity sha512-17oIGVlqz6CchO9RFYn5U6ZpWRZIngayYCtrPRSgANSwC2V1Jb+iP74nVxzzXJte8b8BYxrL1yY96xfhTBrNNQ==
@@ -1924,6 +1931,16 @@
     nanoid "3.3.6"
     query-string "^7.1.3"
     react-is "^18.2.0"
+    use-latest-callback "^0.1.9"
+
+"@react-navigation/drawer@^7.0.0-alpha.7":
+  version "7.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-7.0.0-alpha.7.tgz#8a5c69277b86585be4bbb49ed7dd23a5497496bd"
+  integrity sha512-i0Asfz9ig15w+1uTiWkY3F1e4aOe9JjhKtUfmvE87XQ/udc27WfqsAhULXt/5UeM+s9ZbELwB1QTP0RM5c3ZXQ==
+  dependencies:
+    "@react-navigation/elements" "^2.0.0-alpha.4"
+    color "^4.2.3"
+    react-native-drawer-layout "^4.0.0-alpha.3"
     use-latest-callback "^0.1.9"
 
 "@react-navigation/elements@^2.0.0-alpha.4":
@@ -5737,6 +5754,13 @@ react-native-codegen@0.71.6:
     jscodeshift "^0.14.0"
     nullthrows "^1.1.1"
 
+react-native-drawer-layout@^4.0.0-alpha.3:
+  version "4.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-native-drawer-layout/-/react-native-drawer-layout-4.0.0-alpha.3.tgz#0adf51e816f2ce094d415fe33d9f43c1e6df6ae2"
+  integrity sha512-BRlX8l2gDD41fs8RfaemjDBDV0PPspDMvej/3b9QWfp+JQ/H8tkSdWBtUBbSBzYdqyqy2bHV4epOCMb4t+0B0g==
+  dependencies:
+    use-latest-callback "^0.1.9"
+
 react-native-gesture-handler@^2.14.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.14.0.tgz#d6aec0d8b2e55c67557fd6107e828c0a1a248be8"
@@ -5747,6 +5771,16 @@ react-native-gesture-handler@^2.14.0:
     invariant "^2.2.4"
     lodash "^4.17.21"
     prop-types "^15.7.2"
+
+react-native-reanimated@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.6.1.tgz#5add41efafac6d0befd9786e752e7f26dbe903b7"
+  integrity sha512-F4vG9Yf9PKmE3GaWtVGUpzj3SM6YY2cx1yRHCwiMd1uY7W0gU017LfcVUorboJnj0y5QZqEriEK1Usq2Y8YZqg==
+  dependencies:
+    "@babel/plugin-transform-object-assign" "^7.16.7"
+    "@babel/preset-typescript" "^7.16.7"
+    convert-source-map "^2.0.0"
+    invariant "^2.2.4"
 
 react-native-safe-area-context@^4.8.2:
   version "4.8.2"
