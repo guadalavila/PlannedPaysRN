@@ -3,5 +3,12 @@ export type RootStackLogoutParamList = {
 };
 
 export type RootStackLoginParamList = {
-    DashboardScreen: undefined;
+    Drawer: undefined;
+};
+
+export type DrawerStackList = {
+    HomeScreen: undefined;
+    CategoriesScreen: undefined;
+    SettingsScreen: undefined;
+    ProfileScreen: undefined;
 };

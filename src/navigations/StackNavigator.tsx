@@ -1,8 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackLoginParamList, RootStackLogoutParamList } from './types';
+import Drawer from '~components/Drawer';
 import LoginScreen from '~screens/LoginScreen';
-import DashboardScreen from '~screens/DashboardScreen';
-import { headerStyle } from '~utils/styles';
 
 const StackLoggedIn = createStackNavigator<RootStackLoginParamList>();
 const StackLoggedOut = createStackNavigator<RootStackLogoutParamList>();
@@ -17,12 +16,12 @@ export function StackNavigatorLogOut() {
 
 export function StackNavigatorLogIn() {
     return (
+        // eslint-disable-next-line react/react-in-jsx-scope
         <StackLoggedIn.Navigator
-            initialRouteName='DashboardScreen'
             screenOptions={{
-                ...headerStyle,
+                headerShown: false,
             }}>
-            <StackLoggedIn.Screen options={{ title: 'Home' }} name={'DashboardScreen'} component={DashboardScreen} />
+            <StackLoggedIn.Screen name='Drawer' component={Drawer} />
         </StackLoggedIn.Navigator>
     );
 }
