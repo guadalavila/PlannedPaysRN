@@ -35,6 +35,9 @@ export const GlobalStyles = StyleSheet.create({
     textCenter: {
         textAlign: 'center',
     },
+    alignSelf: {
+        alignSelf: 'center',
+    },
 });
 
 export const headerStyle = {

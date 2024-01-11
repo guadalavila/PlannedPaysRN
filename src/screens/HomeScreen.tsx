@@ -13,7 +13,7 @@ import Container from '~components/Container';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'HomeScreen'> {}
 
-const HomeScreen = ({}: Props) => {
+const HomeScreen = ({ navigation }: Props) => {
     return (
         <Container>
             <Card title='Tendencia de equilibrio'>
@@ -33,7 +33,7 @@ const HomeScreen = ({}: Props) => {
             <Circle backgroundColor={colors.light.primary}>
                 <Text>&</Text>
             </Circle>
-            <Fab onPress={() => {}} />
+            <Fab onPress={() => navigation.navigate('AddNewExpense')} />
         </Container>
     );
 };

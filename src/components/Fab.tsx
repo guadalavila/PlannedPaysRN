@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '~utils/colors';
+import Text from './Text';
+import { GlobalStyles } from '~utils/styles';
 
 interface FabProps {
     onPress: () => void;
@@ -9,7 +11,7 @@ interface FabProps {
 const Fab = ({ onPress }: FabProps) => {
     return (
         <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.container}>
-            <Text>+</Text>
+            <Text style={GlobalStyles.alignSelf}>+</Text>
         </TouchableOpacity>
     );
 };
