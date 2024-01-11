@@ -1,8 +1,8 @@
 const common = {
-    primary: '#2969ff',
-    primaryDark: '#156064',
-    secondary: '#F8E16C',
-    tertiary: '#FB8F67',
+    primary: '#567DF4',
+    primaryDark: '#22215B',
+    secondary: '#4CE364',
+    tertiary: '#FFC700',
     background: '#EFEFEF',
     white: '#FFFFFF',
     separator: '#D1D1D1',

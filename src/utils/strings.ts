@@ -5,6 +5,7 @@ export const STRINGS = {
         settings: 'Configuración',
         profile: 'Perfil',
         transactions: 'Transacciones',
+        creditCard: 'Tarjetas de crédito',
     },
     HOME: {
         still_to_be_paid: 'Pendientes de Pago',
