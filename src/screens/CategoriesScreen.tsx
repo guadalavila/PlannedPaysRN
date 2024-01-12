@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Container from '~components/Container';
@@ -10,9 +10,11 @@ import { getColor } from '~utils/helpers';
 import { CATEGORIES } from '~utils/mock';
 import { spacing } from '~utils/spacing';
 import { GlobalStyles } from '~utils/styles';
+import ModalInput from '~components/ModalInput';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'CategoriesScreen'> {}
 const CategoriesScreen = ({}: Props) => {
+    const [showModal, setShowModal] = useState(false);
     return (
         <Container>
             <FlatList
@@ -26,7 +28,14 @@ const CategoriesScreen = ({}: Props) => {
                 keyExtractor={(item) => item._id}
                 onEndReachedThreshold={0.2}
             />
-            <Fab onPress={() => {}} />
+            <Fab onPress={() => setShowModal(!showModal)} />
+            <ModalInput
+                loading={false}
+                title='Nueva Categoria'
+                visible={showModal}
+                confirmButton='Guardar'
+                onConfirmPressed={() => setShowModal(!showModal)}
+            />
         </Container>
     );
 };
