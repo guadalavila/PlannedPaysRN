@@ -22,11 +22,7 @@ const Drawer = () => {
                 name='CategoriesScreen'
                 component={CategoriesScreen}
             />
-            <DrawerStack.Screen
-                options={{ title: STRINGS.DRAWER.profile }}
-                name='ProfileScreen'
-                component={ProfileScreen}
-            />
+
             <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.creditCard }}
                 name='CreditCardScreen'
@@ -37,6 +33,11 @@ const Drawer = () => {
                 name='AddNewExpense'
                 component={AddNewExpense}
             /> */}
+            <DrawerStack.Screen
+                options={{ title: STRINGS.DRAWER.profile }}
+                name='ProfileScreen'
+                component={ProfileScreen}
+            />
             <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.settings }}
                 name='SettingsScreen'

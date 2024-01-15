@@ -1,6 +1,6 @@
 import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import Button from '~components/Button';
 import Card from '~components/Card';
 import Circle from '~components/Circle';

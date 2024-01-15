@@ -6,7 +6,6 @@ import Fab from '~components/Fab';
 import Text from '~components/Text';
 import { DrawerStackList } from '~navigations/types';
 import { colors } from '~utils/colors';
-import { getColor } from '~utils/helpers';
 import { CATEGORIES } from '~utils/mock';
 import { spacing } from '~utils/spacing';
 import { GlobalStyles } from '~utils/styles';

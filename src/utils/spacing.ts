@@ -6,4 +6,6 @@ export const spacing = {
     L: 10,
     XL: 14,
     XXL: 16,
+    XXXL: 20,
+    XXXXL: 30,
 };
