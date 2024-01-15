@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }: Props) => {
             <Circle backgroundColor={colors.light.primary}>
                 <Text>&</Text>
             </Circle>
-            <Fab onPress={() => navigation.navigate('AddNewExpense')} />
+            <Fab icon='add' onPress={() => navigation.navigate('AddNewExpense')} />
         </Container>
     );
 };

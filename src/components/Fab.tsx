@@ -1,17 +1,21 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { colors } from '~utils/colors';
-import Text from './Text';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { GlobalStyles } from '~utils/styles';
 
 interface FabProps {
+    icon: string;
     onPress: () => void;
+    color?: string;
 }
 
-const Fab = ({ onPress }: FabProps) => {
+const Fab = ({ icon, onPress, color = colors.light.white }: FabProps) => {
     return (
         <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.container}>
-            <Text style={GlobalStyles.alignSelf}>+</Text>
+            <View style={styles.icon}>
+                <Icon style={GlobalStyles.alignSelf} name={icon} size={30} color={color} />
+            </View>
         </TouchableOpacity>
     );
 };
@@ -27,5 +31,9 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 50,
+    },
+    icon: {
+        flex: 1,
+        justifyContent: 'center',
     },
 });
