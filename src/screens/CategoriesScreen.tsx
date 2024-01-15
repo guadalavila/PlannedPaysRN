@@ -37,6 +37,8 @@ const CategoriesScreen = ({}: Props) => {
                 title='Nueva Categoria'
                 visible={showModal}
                 confirmButton='Guardar'
+                cancelButton='Cancelar'
+                onCancelPressed={() => setShowModal(false)}
                 onConfirmPressed={() => setShowModal(!showModal)}
             />
         </Container>
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.light.separator,
         padding: spacing.L,
         marginBottom: spacing.S,
+        backgroundColor: colors.light.white,
     },
     text: {
         paddingHorizontal: spacing.S,

@@ -32,11 +32,11 @@ const Drawer = () => {
                 name='CreditCardScreen'
                 component={CreditCardScreen}
             />
-            <DrawerStack.Screen
+            {/* <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.newExpense }}
                 name='AddNewExpense'
                 component={AddNewExpense}
-            />
+            /> */}
             <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.settings }}
                 name='SettingsScreen'

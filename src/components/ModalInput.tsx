@@ -34,7 +34,7 @@ const ModalInput = ({
                         <View style={styles.containerInfo}>
                             <Text style={styles.title}>{title}</Text>
                             <TextInput
-                                placeholder={'Ingresá..'}
+                                placeholder={'Ingresá...'}
                                 numberOfLines={1}
                                 // placeholderTextColor={themeApp.colors.textInput}
                                 style={[
@@ -138,9 +138,10 @@ const styles = StyleSheet.create({
     },
     buttonOutline: {
         borderColor: colors.light.primary,
-        borderRadius: 10,
+        borderRadius: spacing.M,
         borderWidth: 1,
         alignItems: 'center',
+        paddingVertical: spacing.M,
     },
     textButtonSecondary: {},
     containerButtons: {
