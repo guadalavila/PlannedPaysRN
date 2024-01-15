@@ -22,7 +22,7 @@ const CategoriesScreen = ({}: Props) => {
                 data={CATEGORIES}
                 renderItem={({ item }) => (
                     <View style={[styles.item, GlobalStyles.row]}>
-                        <View style={[styles.avatar, { backgroundColor: getColor() }]}>
+                        <View style={[styles.avatar, { backgroundColor: item.color }]}>
                             <Icon name={item.icon} size={22} color={colors.light.white} />
                         </View>
                         <Text style={[GlobalStyles.alignSelf, styles.text]}>{item.label}</Text>
