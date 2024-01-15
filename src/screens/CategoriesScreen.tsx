@@ -11,6 +11,7 @@ import { CATEGORIES } from '~utils/mock';
 import { spacing } from '~utils/spacing';
 import { GlobalStyles } from '~utils/styles';
 import ModalInput from '~components/ModalInput';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'CategoriesScreen'> {}
 const CategoriesScreen = ({}: Props) => {
@@ -21,14 +22,16 @@ const CategoriesScreen = ({}: Props) => {
                 data={CATEGORIES}
                 renderItem={({ item }) => (
                     <View style={[styles.item, GlobalStyles.row]}>
-                        <View style={[styles.avatar, { backgroundColor: getColor() }]} />
+                        <View style={[styles.avatar, { backgroundColor: getColor() }]}>
+                            <Icon name={item.icon} size={22} color={colors.light.white} />
+                        </View>
                         <Text style={[GlobalStyles.alignSelf, styles.text]}>{item.label}</Text>
                     </View>
                 )}
                 keyExtractor={(item) => item._id}
                 onEndReachedThreshold={0.2}
             />
-            <Fab onPress={() => setShowModal(!showModal)} />
+            <Fab icon='add' onPress={() => setShowModal(!showModal)} />
             <ModalInput
                 loading={false}
                 title='Nueva Categoria'
@@ -56,5 +59,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

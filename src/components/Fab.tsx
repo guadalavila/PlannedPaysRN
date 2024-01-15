@@ -25,7 +25,7 @@ export default Fab;
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        right: 0,
+        right: 10,
         bottom: 0,
         backgroundColor: colors.light.primary,
         width: 50,
