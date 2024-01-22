@@ -78,5 +78,13 @@ To learn more about React Native, take a look at the following resources:
 -   [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 -   [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
+```bash
 yarn add --dev babel-plugin-module-resolver
 yarn start --reset-cache
+```
+
+Open xcode:
+
+```bash
+xed -b ios
+```
