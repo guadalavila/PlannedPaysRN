@@ -10,10 +10,12 @@ import { colors } from '~utils/colors';
 import { STRINGS } from '~utils/strings';
 import Fab from '~components/Fab';
 import Container from '~components/Container';
+import useRemoteConfig from '~hooks/useRemoteConfig';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'HomeScreen'> {}
 
 const HomeScreen = ({ navigation }: Props) => {
+    useRemoteConfig();
     return (
         <Container>
             <Card title='Tendencia de equilibrio'>

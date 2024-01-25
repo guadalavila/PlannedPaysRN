@@ -9,6 +9,7 @@ export const CATEGORIES = [
 ];
 
 export const LIST_COLORS = [
+    '#2C3D63',
     '#2D2D45',
     '#2E86AB',
     '#F39237',
@@ -45,7 +46,6 @@ export const LIST_COLORS = [
     '#FA7921',
     '#FFD275',
     '#4A6C6F',
-    '#2C3D63',
     '#695958',
     '#B7A196',
     '#99ABD5',

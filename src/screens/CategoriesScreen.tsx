@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Container from '~components/Container';
@@ -6,28 +6,28 @@ import Fab from '~components/Fab';
 import Text from '~components/Text';
 import { DrawerStackList } from '~navigations/types';
 import { colors } from '~utils/colors';
-import { CATEGORIES } from '~utils/mock';
 import { spacing } from '~utils/spacing';
 import { GlobalStyles } from '~utils/styles';
 import ModalInput from '~components/ModalInput';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { CategoriesContext } from '~contexts/CategoriesContext';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'CategoriesScreen'> {}
 const CategoriesScreen = ({}: Props) => {
     const [showModal, setShowModal] = useState(false);
+    const { categories } = useContext(CategoriesContext);
     return (
         <Container>
             <FlatList
-                data={CATEGORIES}
+                data={categories}
                 renderItem={({ item }) => (
-                    <View style={[styles.item, GlobalStyles.row]}>
+                    <View style={[styles.item, GlobalStyles.row]} key={item.id}>
                         <View style={[styles.avatar, { backgroundColor: item.color }]}>
                             <Icon name={item.icon} size={22} color={colors.light.white} />
                         </View>
                         <Text style={[GlobalStyles.alignSelf, styles.text]}>{item.label}</Text>
                     </View>
                 )}
-                keyExtractor={(item) => item._id}
                 onEndReachedThreshold={0.2}
             />
             <Fab icon='add' onPress={() => setShowModal(!showModal)} />
@@ -51,8 +51,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: colors.light.separator,
         padding: spacing.L,
-        marginBottom: spacing.S,
+        marginVertical: spacing.S,
         backgroundColor: colors.light.white,
+        marginHorizontal: spacing.L,
+        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
     },
     text: {
         paddingHorizontal: spacing.S,

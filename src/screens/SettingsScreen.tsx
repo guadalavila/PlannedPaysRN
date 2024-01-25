@@ -3,7 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
 import { DrawerStackList } from '~navigations/types';
 import Container from '~components/Container';
-import Text from '~components/Text';
+import PaletteColor from '~components/PaletteColor';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'SettingsScreen'> {}
 
@@ -11,7 +11,7 @@ const SettingsScreen = ({}: Props) => {
     return (
         <Container>
             <View>
-                <Text>Color </Text>
+                <PaletteColor />
             </View>
         </Container>
     );
