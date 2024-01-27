@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
         color: colors.light.white,
         fontWeight: '700',
         textAlign: 'center',
-        paddingVertical: spacing.L,
+        paddingVertical: spacing.XL,
     },
 });
