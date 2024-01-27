@@ -10,6 +10,7 @@ import ProfileScreen from '~screens/ProfileScreen';
 import { colors } from '~utils/colors';
 import CreditCardScreen from '~screens/CreditCardScreen';
 import AddNewExpense from '~screens/AddNewExpense';
+import GoalsScreen from '~screens/GoalsScreen';
 
 const DrawerStack = createDrawerNavigator<DrawerStackList>();
 
@@ -28,6 +29,7 @@ const Drawer = () => {
                 name='CreditCardScreen'
                 component={CreditCardScreen}
             />
+            <DrawerStack.Screen options={{ title: STRINGS.DRAWER.goals }} name='GoalsScreen' component={GoalsScreen} />
             {/* <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.newExpense }}
                 name='AddNewExpense'

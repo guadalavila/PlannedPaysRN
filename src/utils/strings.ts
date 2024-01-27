@@ -7,6 +7,7 @@ export const STRINGS = {
         transactions: 'Transacciones',
         creditCard: 'Tarjetas de crédito',
         newExpense: 'Nuevo Gasto',
+        goals: 'Objetivos',
     },
     HOME: {
         still_to_be_paid: 'Pendientes de Pago',
