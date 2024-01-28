@@ -14,4 +14,5 @@ export type DrawerStackList = {
     CreditCardScreen: undefined;
     AddNewExpense: undefined;
     GoalsScreen: undefined;
+    NewGoalScreen: undefined;
 };
