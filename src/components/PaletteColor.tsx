@@ -1,28 +1,32 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '~utils/colors';
 import { LIST_COLORS } from '~utils/mock';
 import { spacing } from '~utils/spacing';
 import Item from './Item';
-import { ThemeContext } from '~contexts/ThemeContext';
 
 interface IPaletteColor {
     colorDefault?: string;
+    style?: StyleProp<ViewStyle> | undefined;
 }
 
-const PaletteColor = ({ colorDefault = colors.light.primary }: IPaletteColor) => {
+const PaletteColor = ({ colorDefault = colors.light.primary, style = {} }: IPaletteColor) => {
     const [colorSelected, setColorSelected] = useState(colorDefault);
     const [showPalette, setShowPalette] = useState(false);
-    const { changeColor } = useContext(ThemeContext);
 
     const onChangeColor = (color: string) => {
         setColorSelected(color);
-        changeColor(color);
+        setShowPalette(false);
     };
     return (
-        <View>
-            <Item text='Color' icon='color-palette-outline' onPress={() => setShowPalette(!showPalette)} />
+        <View style={style}>
+            <Item
+                color={colorSelected}
+                text='Color'
+                icon='color-palette-outline'
+                onPress={() => setShowPalette(!showPalette)}
+            />
             {showPalette && (
                 <View style={styles.container}>
                     {LIST_COLORS.map((color, index) => (
@@ -58,7 +62,6 @@ const styles = StyleSheet.create({
         height: 28,
         borderRadius: 28,
         margin: spacing.XS,
-        backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
     },

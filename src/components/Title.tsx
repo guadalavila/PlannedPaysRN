@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle, View } from 'react-native';
 import Text from './Text';
 import { typography } from '~utils/typography';
 import { spacing } from '~utils/spacing';
 
 interface TitleProps {
     text: string;
+    size?: number;
+    style?: StyleProp<TextStyle> | undefined;
 }
 
-const Title = ({ text }: TitleProps) => {
+const Title = ({ text, size = typography.size.M, style = {} }: TitleProps) => {
     return (
         <View>
-            <Text style={styles.title}>{text}</Text>
+            <Text style={[styles.title, { fontSize: size }, style]}>{text}</Text>
         </View>
     );
 };

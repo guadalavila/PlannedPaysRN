@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         padding: spacing.L,
         marginBottom: spacing.S,
         backgroundColor: colors.light.white,
+        borderRadius: 10,
     },
     text: {
         paddingHorizontal: spacing.S,

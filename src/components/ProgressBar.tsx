@@ -5,33 +5,46 @@ import Text from './Text';
 import { colors } from '~utils/colors';
 import Title from './Title';
 import Card from './Card';
+import { typography } from '~utils/typography';
 
 interface IProgressBar {
-    label: string;
     percent: number;
+    label?: string;
     color?: string;
+    withCard?: boolean;
 }
 
-const ProgressBar = ({ label, percent, color = colors.light.primary }: IProgressBar) => {
+const ProgressBar = ({ percent, label, color = colors.light.primary, withCard = true }: IProgressBar) => {
     const getPercent = () => {
         const value = 100 - percent;
         return value.toString().concat('%');
     };
-    return (
-        <Card>
-            <Title text={label} />
-            <View style={styles.containerBar}>
-                <View style={styles.bar}>
-                    <View
-                        style={[styles.borderStart, { backgroundColor: color, width: percent.toString().concat('%') }]}
-                    />
-                    <View
-                        style={[styles.borderEnd, { width: getPercent(), backgroundColor: 'rgba(13, 64, 174, 0.2)' }]}
-                    />
+
+    const getChildren = () => {
+        return (
+            <>
+                {label && <Title text={label} size={typography.size.S} />}
+                <View style={styles.containerBar}>
+                    <View style={styles.bar}>
+                        <View
+                            style={[
+                                styles.borderStart,
+                                { backgroundColor: color, width: percent.toString().concat('%') },
+                            ]}
+                        />
+                        <View
+                            style={[
+                                styles.borderEnd,
+                                { width: getPercent(), backgroundColor: 'rgba(13, 64, 174, 0.2)' },
+                            ]}
+                        />
+                    </View>
                 </View>
-            </View>
-        </Card>
-    );
+            </>
+        );
+    };
+
+    return <>{withCard ? <Card>{getChildren()}</Card> : <View>{getChildren()}</View>}</>;
 };
 
 export default ProgressBar;
@@ -40,6 +53,7 @@ const styles = StyleSheet.create({
     containerBar: {
         width: '90%',
         alignSelf: 'center',
+        marginTop: spacing.M,
     },
     bar: {
         width: '100%',
