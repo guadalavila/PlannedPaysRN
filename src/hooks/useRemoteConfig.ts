@@ -1,10 +1,11 @@
 import { useContext, useEffect } from 'react';
 import remoteConfig from '@react-native-firebase/remote-config';
 import { ICategory } from '~models/Category';
-import { CategoriesContext } from '~contexts/CategoriesContext';
+import { RemoteConfigContext } from '~contexts/RemoteConfigContext';
+import { ICard } from '~models/Card';
 
 function useRemoteConfig() {
-    const { setCategories } = useContext(CategoriesContext);
+    const { setCategories, setCards } = useContext(RemoteConfigContext);
 
     useEffect(() => {
         remoteConfig()
@@ -16,6 +17,9 @@ function useRemoteConfig() {
                 if (fetchedRemotely) {
                     const parameters = remoteConfig().getAll();
                     const cats = JSON.parse(parameters.categories.asString());
+                    const cards = JSON.parse(parameters.cards.asString());
+                    console.log(cards);
+
                     const categories = cats.categories.map((category: ICategory) => ({
                         id: category.id,
                         color: category.color,
@@ -23,6 +27,12 @@ function useRemoteConfig() {
                         label: category.label,
                     }));
                     setCategories(categories);
+                    const allCards = cards.cards.map((card: ICard) => ({
+                        id: card.id,
+                        brand: card.brand,
+                        img: card.img,
+                    }));
+                    setCards(allCards);
                 } else {
                     console.log(
                         'No configs were fetched from the backend, and the local configs were already activated',
