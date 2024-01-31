@@ -10,12 +10,12 @@ import { spacing } from '~utils/spacing';
 import { GlobalStyles } from '~utils/styles';
 import ModalInput from '~components/ModalInput';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { CategoriesContext } from '~contexts/CategoriesContext';
+import { RemoteConfigContext } from '~contexts/RemoteConfigContext';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'CategoriesScreen'> {}
 const CategoriesScreen = ({}: Props) => {
     const [showModal, setShowModal] = useState(false);
-    const { categories } = useContext(CategoriesContext);
+    const { categories } = useContext(RemoteConfigContext);
     return (
         <Container>
             <FlatList
