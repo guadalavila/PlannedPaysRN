@@ -8,6 +8,8 @@ const common = {
     black: '#000000',
     separator: '#D1D1D1',
     textPrimary: '#000000',
+    grey: '#797979',
+    error: '#DD0101',
 };
 
 const light = {
