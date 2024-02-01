@@ -1,31 +1,30 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
 import { typography } from '~utils/typography';
 import Text from './Text';
-import { CREDIT_CARD_TYPE } from '~models/CreditCard';
+import { ICard } from '~models/Card';
+import { SvgUri } from 'react-native-svg';
 
 interface CreditCardProps {
-    name: string;
-    type: CREDIT_CARD_TYPE;
+    card: ICard | undefined;
+    name?: string;
 }
 
-const CreditCard = ({ type, name }: CreditCardProps) => {
+const CreditCard = ({ name = '', card }: CreditCardProps) => {
     return (
-        <View style={styles.container}>
-            {type === 'MASTER' ? (
-                <Image resizeMode={'contain'} style={styles.image} source={require('../../assets/images/master.png')} />
-            ) : (
-                <Image resizeMode={'contain'} style={styles.image} source={require('../../assets/images/visa.png')} />
-            )}
+        <ImageBackground resizeMode='cover' style={styles.container} source={require('../../assets/images/back1.png')}>
+            {card && <SvgUri style={styles.image} height={80} width={90} uri={card.img} />}
             <View style={styles.start}>
-                <Text style={styles.nameText}>{name}</Text>
+                <Text style={styles.nameText}>{name} </Text>
             </View>
             <View style={styles.end}>
-                <Text style={styles.numberText}>**** **** **** ****</Text>
+                <Text style={styles.numberText}>
+                    ****{'  '}****{'  '}****{'  '}****
+                </Text>
             </View>
-        </View>
+        </ImageBackground>
     );
 };
 
@@ -33,48 +32,42 @@ export default CreditCard;
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: spacing.XXXXL,
+        marginHorizontal: spacing.XL,
         marginVertical: spacing.XXXXL,
-        borderRadius: 20,
-        paddingEnd: 10,
-        width: '100%',
     },
     start: {
-        backgroundColor: '#383855',
         borderTopEndRadius: 20,
         borderTopStartRadius: 20,
-        height: 110,
+        height: 140,
         padding: spacing.L,
     },
     end: {
-        backgroundColor: '#A8A8C7',
         borderBottomEndRadius: 20,
         borderBottomStartRadius: 20,
-        height: 60,
+        height: 70,
         padding: spacing.L,
     },
     numberText: {
-        color: colors.light.white,
+        color: colors.light.primary,
         fontWeight: '700',
-        fontSize: typography.size.L,
+        fontSize: typography.size.XXL,
         position: 'absolute',
         top: 20,
-        left: 25,
+        left: 15,
     },
     nameText: {
-        color: colors.light.white,
-        fontWeight: '700',
-        fontSize: typography.size.M,
+        color: colors.light.black,
+        fontWeight: 'bold',
+        fontSize: typography.size.L,
         position: 'absolute',
-        top: 56,
-        left: 25,
+        top: 100,
+        left: 15,
+        textTransform: 'uppercase',
     },
     image: {
-        width: 90,
-        height: 50,
         zIndex: 999,
         position: 'absolute',
-        top: 10,
-        right: 14,
+        top: 0,
+        right: 0,
     },
 });
