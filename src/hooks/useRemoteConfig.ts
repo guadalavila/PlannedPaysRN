@@ -18,7 +18,6 @@ function useRemoteConfig() {
                     const parameters = remoteConfig().getAll();
                     const cats = JSON.parse(parameters.categories.asString());
                     const cards = JSON.parse(parameters.cards.asString());
-                    console.log(cards);
 
                     const categories = cats.categories.map((category: ICategory) => ({
                         id: category.id,
