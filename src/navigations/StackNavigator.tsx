@@ -3,6 +3,7 @@ import { RootStackLoginParamList, RootStackLogoutParamList } from './types';
 import Drawer from '~components/Drawer';
 import LoginScreen from '~screens/LoginScreen';
 import NewGoalScreen from '~screens/NewGoalScreen';
+import AddCreditCardScreen from '~screens/AddCreditCardScreen';
 import { colors } from '~utils/colors';
 import Loading from '~components/Loading';
 
@@ -42,6 +43,21 @@ export function StackNavigatorLogIn(loading: boolean) {
                         }}
                         name='NewGoalScreen'
                         component={NewGoalScreen}
+                    />
+                    <StackLoggedIn.Screen
+                        options={{
+                            title: 'Nueva Tarjeta',
+                            headerStyle: {
+                                backgroundColor: colors.light.primary,
+                            },
+                            headerTintColor: '#fff',
+                            headerTitleStyle: {
+                                fontWeight: 'bold',
+                            },
+                            headerBackTitle: ' ',
+                        }}
+                        name='AddCreditCardScreen'
+                        component={AddCreditCardScreen}
                     />
                 </StackLoggedIn.Navigator>
             )}
