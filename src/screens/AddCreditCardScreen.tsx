@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ScrollView, View } from 'react-native';
 import { RootStackLoginParamList } from '~navigations/types';
@@ -7,9 +7,7 @@ import Input from '~components/Input';
 import Button from '~components/Button';
 import Dropdown from '~components/Dropdown';
 import CreditCard from '~components/CreditCard';
-import { ICard } from '~models/Card';
 import useForm from '~hooks/useForm';
-import Text from '~components/Text';
 import TextError from '~components/TextError';
 
 interface Props extends NativeStackScreenProps<RootStackLoginParamList, 'AddCreditCardScreen'> {}
@@ -28,6 +26,7 @@ const AddCreditCardScreen = ({}: Props) => {
                 />
                 <TextError text={errors.card} />
                 <Input
+                    maxLength={25}
                     value={fields.name}
                     placeholder='Nombre'
                     keyboardType='default'
