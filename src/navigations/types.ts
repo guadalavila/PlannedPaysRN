@@ -1,9 +1,12 @@
 export type RootStackLogoutParamList = {
     LoginScreen: undefined;
+    SignUpScreen: undefined;
 };
 
 export type RootStackLoginParamList = {
     Drawer: undefined;
+    AddCreditCardScreen: undefined;
+    NewGoalScreen: undefined;
 };
 
 export type DrawerStackList = {
@@ -15,4 +18,5 @@ export type DrawerStackList = {
     AddNewExpense: undefined;
     GoalsScreen: undefined;
     NewGoalScreen: undefined;
+    AddCreditCardScreen: undefined;
 };
