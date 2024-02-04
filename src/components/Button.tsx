@@ -8,12 +8,21 @@ import { spacing } from '~utils/spacing';
 interface ButtonProps {
     title: string;
     onPress: () => void;
+    outlined?: boolean;
 }
-const Button = ({ title, onPress }: ButtonProps) => {
+const Button = ({ title, onPress, outlined = false }: ButtonProps) => {
     return (
-        <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.button}>
-            <Text style={styles.title}>{title}</Text>
-        </TouchableOpacity>
+        <>
+            {!outlined ? (
+                <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.button}>
+                    <Text style={styles.title}>{title}</Text>
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.outlined}>
+                    <Text style={styles.titleOutlined}>{title}</Text>
+                </TouchableOpacity>
+            )}
+        </>
     );
 };
 
@@ -28,6 +37,18 @@ const styles = StyleSheet.create({
     },
     title: {
         color: colors.light.white,
+        fontWeight: '700',
+        textAlign: 'center',
+        paddingVertical: spacing.XL,
+    },
+    outlined: {
+        borderColor: colors.light.primary,
+        marginVertical: spacing.L,
+        marginHorizontal: spacing.S,
+        borderRadius: spacing.S,
+    },
+    titleOutlined: {
+        color: colors.light.primary,
         fontWeight: '700',
         textAlign: 'center',
         paddingVertical: spacing.XL,
