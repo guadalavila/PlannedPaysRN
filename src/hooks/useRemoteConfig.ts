@@ -5,7 +5,7 @@ import { RemoteConfigContext } from '~contexts/RemoteConfigContext';
 import { ICard } from '~models/Card';
 
 function useRemoteConfig() {
-    const { setCategories, setCards } = useContext(RemoteConfigContext);
+    const { setCategories, setCards, setTokenLogin } = useContext(RemoteConfigContext);
 
     useEffect(() => {
         remoteConfig()
@@ -16,6 +16,7 @@ function useRemoteConfig() {
             .then((fetchedRemotely) => {
                 if (fetchedRemotely) {
                     const parameters = remoteConfig().getAll();
+                    setTokenLogin(parameters.token_login.asString());
                     const cats = JSON.parse(parameters.categories.asString());
                     const cards = JSON.parse(parameters.cards.asString());
 

@@ -7,11 +7,15 @@ export const RemoteConfigContext = React.createContext<{
     setCategories: React.Dispatch<ICategory[]>;
     cards: ICard[];
     setCards: React.Dispatch<ICard[]>;
+    tokenLogin: string;
+    setTokenLogin: React.Dispatch<string>;
 }>({
     categories: [],
     setCategories: () => {},
     cards: [],
     setCards: () => {},
+    tokenLogin: '',
+    setTokenLogin: () => {},
 });
 
 interface RemoteConfigContextProviderProps {
@@ -21,6 +25,7 @@ interface RemoteConfigContextProviderProps {
 export const RemoteConfigContextProvider: React.FC<RemoteConfigContextProviderProps> = ({ children }) => {
     const [categories, setCategories] = useState<ICategory[]>([]);
     const [cards, setCards] = useState<ICard[]>([]);
+    const [token, setToken] = useState('');
 
     const setCategoriesApp = (categories_: ICategory[]) => {
         setCategories(categories_);
@@ -30,6 +35,10 @@ export const RemoteConfigContextProvider: React.FC<RemoteConfigContextProviderPr
         setCards(cards_);
     };
 
+    const setTokenLogin = (value: string) => {
+        setToken(value);
+    };
+
     return (
         <RemoteConfigContext.Provider
             value={{
@@ -37,6 +46,8 @@ export const RemoteConfigContextProvider: React.FC<RemoteConfigContextProviderPr
                 setCategories: setCategoriesApp,
                 cards: cards,
                 setCards: setCards_,
+                tokenLogin: token,
+                setTokenLogin: setTokenLogin,
             }}>
             {children}
         </RemoteConfigContext.Provider>
