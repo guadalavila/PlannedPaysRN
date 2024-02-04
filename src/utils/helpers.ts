@@ -18,3 +18,10 @@ export function hexToRGB(hex: string, alpha: number = 1) {
         return 'rgb(' + r + ', ' + g + ', ' + b + ')';
     }
 }
+
+export const validateEmail = (email: string) => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        return true;
+    }
+    return false;
+};
