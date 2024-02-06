@@ -7,6 +7,7 @@ import AddCreditCardScreen from '~screens/AddCreditCardScreen';
 import { colors } from '~utils/colors';
 import Loading from '~components/Loading';
 import SignUpScreen from '~screens/SignUpScreen';
+import AddTransactionScreen from '~screens/AddTransactionScreen';
 
 const StackLoggedIn = createStackNavigator<RootStackLoginParamList>();
 const StackLoggedOut = createStackNavigator<RootStackLogoutParamList>();
@@ -17,12 +18,21 @@ export function StackNavigatorLogOut(loading: boolean) {
             {loading ? (
                 <Loading />
             ) : (
-                <StackLoggedOut.Navigator initialRouteName={'LoginScreen'}>
+                <StackLoggedOut.Navigator
+                    initialRouteName={'LoginScreen'}
+                    screenOptions={{
+                        headerStyle: {
+                            backgroundColor: colors.dark.background,
+                        },
+                    }}>
                     <StackLoggedOut.Screen name={'LoginScreen'} component={LoginScreen} options={{ title: 'Login' }} />
                     <StackLoggedOut.Screen
                         name={'SignUpScreen'}
                         component={SignUpScreen}
-                        options={{ title: 'Registro', headerBackTitle: ' ' }}
+                        options={{
+                            title: 'Registro',
+                            headerBackTitle: ' ',
+                        }}
                     />
                 </StackLoggedOut.Navigator>
             )}
@@ -70,6 +80,21 @@ export function StackNavigatorLogIn(loading: boolean) {
                         }}
                         name='AddCreditCardScreen'
                         component={AddCreditCardScreen}
+                    />
+                    <StackLoggedIn.Screen
+                        options={{
+                            title: 'Nueva Transacción',
+                            headerStyle: {
+                                backgroundColor: colors.light.primary,
+                            },
+                            headerTintColor: '#fff',
+                            headerTitleStyle: {
+                                fontWeight: 'bold',
+                            },
+                            headerBackTitle: ' ',
+                        }}
+                        name='AddTransactionScreen'
+                        component={AddTransactionScreen}
                     />
                 </StackLoggedIn.Navigator>
             )}

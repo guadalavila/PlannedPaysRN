@@ -7,6 +7,7 @@ export type RootStackLoginParamList = {
     Drawer: undefined;
     AddCreditCardScreen: undefined;
     NewGoalScreen: undefined;
+    AddTransactionScreen: undefined;
 };
 
 export type DrawerStackList = {
@@ -19,4 +20,5 @@ export type DrawerStackList = {
     GoalsScreen: undefined;
     NewGoalScreen: undefined;
     AddCreditCardScreen: undefined;
+    AddTransactionScreen: undefined;
 };
