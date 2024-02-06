@@ -1,30 +1,33 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
 import { typography } from '~utils/typography';
 import Text from './Text';
 import { ICard } from '~models/Card';
 import { SvgUri } from 'react-native-svg';
+import LinearGradient from 'react-native-linear-gradient';
 
 interface CreditCardProps {
     card: ICard | undefined;
+    colorsCard: string[];
+    numbers?: number | string;
     name?: string;
 }
 
-const CreditCard = ({ name = '', card }: CreditCardProps) => {
+const CreditCard = ({ name = '', colorsCard, card, numbers = '**' }: CreditCardProps) => {
     return (
-        <ImageBackground resizeMode='cover' style={styles.container} source={require('../../assets/images/back1.png')}>
-            {card && <SvgUri style={styles.image} height={80} width={90} uri={card.img} />}
+        <LinearGradient style={styles.container} start={{ x: 0.3, y: 0 }} end={{ x: 0.5, y: 1 }} colors={colorsCard}>
+            {card && <SvgUri style={styles.image} height={100} width={90} uri={card.img} />}
             <View style={styles.start}>
                 <Text style={styles.nameText}>{name} </Text>
             </View>
             <View style={styles.end}>
                 <Text style={styles.numberText}>
-                    ****{'  '}****{'  '}****{'  '}****
+                    ****{'   '}****{'   '}****{'   '}**{numbers}
                 </Text>
             </View>
-        </ImageBackground>
+        </LinearGradient>
     );
 };
 
@@ -33,7 +36,8 @@ export default CreditCard;
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: spacing.XL,
-        marginVertical: spacing.XXXXL,
+        marginVertical: spacing.XXL,
+        borderRadius: 20,
     },
     start: {
         borderTopEndRadius: 20,
@@ -48,15 +52,15 @@ const styles = StyleSheet.create({
         padding: spacing.L,
     },
     numberText: {
-        color: colors.light.primary,
+        color: colors.light.white,
         fontWeight: '700',
         fontSize: typography.size.XXL,
         position: 'absolute',
-        top: 20,
+        top: 10,
         left: 15,
     },
     nameText: {
-        color: colors.light.black,
+        color: colors.light.white,
         fontWeight: 'bold',
         fontSize: typography.size.L,
         position: 'absolute',
