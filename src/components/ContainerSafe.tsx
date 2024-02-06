@@ -15,7 +15,7 @@ const ContainerSafe = ({ children }: IContainerSafeProps) => {
     const { top, bottom } = useSafeAreaInsets();
     return (
         <>
-            <StatusBar translucent barStyle={theme !== 'dark' ? 'light-content' : 'dark-content'} />
+            <StatusBar translucent barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} />
             <View
                 style={[
                     styles.container,
