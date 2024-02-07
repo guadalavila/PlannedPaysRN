@@ -18,7 +18,7 @@ interface IUseFormReturn {
 }
 
 const useForm = (
-    form: 'NewCreditCard' | 'SignUpForm' | 'LoginForm',
+    form: 'NewCreditCard' | 'SignUpForm' | 'LoginForm' | 'UpdateUser',
     onSubmit: (fields: IFormFields) => void,
 ): IUseFormReturn => {
     const { tokenLogin } = useContext(RemoteConfigContext);
@@ -40,6 +40,8 @@ const useForm = (
             validateSignUp();
         } else if (form === 'LoginForm') {
             validateLogin();
+        } else if (form === 'UpdateUser') {
+            validateUpdateUser();
         }
         // setErrors(formErrors);
 
@@ -58,6 +60,10 @@ const useForm = (
         } else if (!fields.card) {
             setErrors({
                 card: 'Debes seleccionar una tarjeta',
+            });
+        } else if (!fields.number) {
+            setErrors({
+                number: 'Debes ingresar dos números',
             });
         } else {
             setErrors({});
@@ -120,6 +126,21 @@ const useForm = (
         } else if (fields.password && fields.password.length < 6) {
             setErrors({
                 password: 'La contraseña debe tener como mínimo 6 caracteres',
+            });
+        } else {
+            setErrors({});
+            onSubmit(fields);
+        }
+    };
+
+    const validateUpdateUser = () => {
+        if (!fields.name) {
+            setErrors({
+                name: 'Debes ingresar un nombre',
+            });
+        } else if (!fields.lastName) {
+            setErrors({
+                lastName: 'Debes ingresar un apellido ',
             });
         } else {
             setErrors({});
