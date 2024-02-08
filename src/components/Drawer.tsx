@@ -6,7 +6,6 @@ import CategoriesScreen from '~screens/CategoriesScreen';
 import { headerStyle } from '~utils/styles';
 import SettingsScreen from '~screens/SettingsScreen';
 import { STRINGS } from '~utils/strings';
-import ProfileScreen from '~screens/ProfileScreen';
 import { colors } from '~utils/colors';
 import CreditCardScreen from '~screens/CreditCardScreen';
 import GoalsScreen from '~screens/GoalsScreen';
@@ -46,11 +45,7 @@ const Drawer = ({ navigation }) => {
                 name='AddNewExpense'
                 component={AddNewExpense}
             /> */}
-            <DrawerStack.Screen
-                options={{ title: STRINGS.DRAWER.profile }}
-                name='ProfileScreen'
-                component={ProfileScreen}
-            />
+
             <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.settings }}
                 name='SettingsScreen'
