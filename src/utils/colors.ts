@@ -2,6 +2,7 @@ const common = {
     primary: '#181d30',
     primaryDark: '#004c8f',
     secondary: '#4CE364',
+    success: '#4CE364',
     tertiary: '#FFC700',
     background: '#EFEFEF',
     white: '#FFFFFF',
