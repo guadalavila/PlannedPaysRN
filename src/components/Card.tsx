@@ -14,7 +14,7 @@ interface CardProps {
 
 const Card = ({ children, title }: CardProps) => {
     return (
-        <View style={[styles.container, GlobalStyles.shadowCard]}>
+        <View style={[styles.container, GlobalStyles.dropdown]}>
             {title && (
                 <>
                     <Text style={styles.title}>{title}</Text>
