@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
 import { DrawerStackList } from '~navigations/types';
@@ -9,11 +9,28 @@ import Text from '~components/Text';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
 import { typography } from '~utils/typography';
+import Button from '~components/Button';
+import useForm from '~hooks/useForm';
+import TextError from '~components/TextError';
+import Select from '~components/Select';
+import { ThemeContext } from '~contexts/ThemeContext';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'SettingsScreen'> {}
 
 const SettingsScreen = ({}: Props) => {
-    const { user } = useAuth();
+    const { user, update } = useAuth();
+    const { fields, errors, handleSubmit, setFieldValue } = useForm('UpdateUser', () => doUpdate());
+    const { setTheme, theme } = useContext(ThemeContext);
+    console.log(theme);
+
+    useEffect(() => {
+        setFieldValue('name', user.name);
+        setFieldValue('lastName', user.lastName);
+    }, []);
+
+    const doUpdate = () => {
+        update(fields.name, fields.lastName);
+    };
     return (
         <Container>
             <View style={styles.avatar}>
@@ -22,8 +39,20 @@ const SettingsScreen = ({}: Props) => {
                     {user.lastName.charAt(0).toUpperCase()}
                 </Text>
             </View>
-            <Input value={user.name} placeholder='Nombre' keyboardType='default' onChangeText={(value) => {}} />
-            <Input value={user.lastName} placeholder='Nombre' keyboardType='default' onChangeText={(value) => {}} />
+            <Input
+                value={fields.name}
+                placeholder='Nombre'
+                keyboardType='default'
+                onChangeText={(value) => setFieldValue('name', value)}
+            />
+            {errors.name && <TextError text={errors.name} />}
+            <Input
+                value={fields.lastName}
+                placeholder='Apellido'
+                keyboardType='default'
+                onChangeText={(value) => setFieldValue('lastName', value)}
+            />
+            {errors.lastName && <TextError text={errors.lastName} />}
             <Input
                 editable={false}
                 value={user.email}
@@ -31,7 +60,8 @@ const SettingsScreen = ({}: Props) => {
                 keyboardType='default'
                 onChangeText={(value) => {}}
             />
-            {/* <PaletteColor  /> */}
+            <Select title={'Modo Oscuro'} selected={theme === 'dark'} onChangeSelect={setTheme} />
+            <Button onPress={handleSubmit} title='Guardar' />
         </Container>
     );
 };
