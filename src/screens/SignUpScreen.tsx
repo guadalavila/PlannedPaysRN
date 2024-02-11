@@ -8,6 +8,7 @@ import TextError from '~components/TextError';
 import useForm from '~hooks/useForm';
 import { RootStackLogoutParamList } from '~navigations/types';
 import useAuth from '~hooks/useAuth';
+import { encrypt } from '~utils/encrypt';
 
 interface Props extends NativeStackScreenProps<RootStackLogoutParamList, 'SignUpScreen'> {}
 
@@ -19,7 +20,7 @@ const SignUpScreen = ({}: Props) => {
         signUp({
             name: fields.name,
             lastName: fields.lastName,
-            password: fields.password, //TODO encrypted password
+            password: encrypt(fields.password),
             email: String(fields.email).toLowerCase(),
             date: new Date(),
         });
