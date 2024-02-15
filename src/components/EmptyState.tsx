@@ -16,7 +16,7 @@ const EmptyState = ({ title, icon }: IEmptyStateProps) => {
         <View style={styles.container}>
             {icon && (
                 <View style={[GlobalStyles.alignSelf, { marginBottom: spacing.S }]}>
-                    <Icon name={icon} color={colors.light.primary} size={100} />
+                    <Icon name={icon} color={colors.light.primaryDark} size={100} />
                 </View>
             )}
             <Text style={styles.text}>{title}</Text>
