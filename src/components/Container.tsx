@@ -17,7 +17,7 @@ const Container = ({ children }: IContainerProps) => {
 
     return (
         <>
-            <StatusBar translucent barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} />
+            <StatusBar translucent barStyle={'light-content'} />
             <View style={[styles.container, { backgroundColor: colors.background, paddingBottom: bottom }]}>
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
                     <View style={GlobalStyles.flex1}>{children}</View>
