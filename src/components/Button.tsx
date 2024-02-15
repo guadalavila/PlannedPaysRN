@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Text from './Text';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
+import { ThemeContext } from '~contexts/ThemeContext';
 
 interface ButtonProps {
     title: string;
     onPress: () => void;
     outlined?: boolean;
+    disabled?: boolean;
 }
-const Button = ({ title, onPress, outlined = false }: ButtonProps) => {
+const Button = ({ title, onPress, outlined = false, disabled = false }: ButtonProps) => {
+    const { theme } = useContext(ThemeContext);
     return (
         <>
             {!outlined ? (
-                <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.button}>
+                <TouchableOpacity disabled={disabled} activeOpacity={0.7} onPress={onPress} style={styles.button}>
                     <Text style={styles.title}>{title}</Text>
                 </TouchableOpacity>
             ) : (
-                <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.outlined}>
-                    <Text style={styles.titleOutlined}>{title}</Text>
+                <TouchableOpacity disabled={disabled} activeOpacity={0.7} onPress={onPress} style={styles.outlined}>
+                    <Text style={theme === 'dark' ? styles.titleOutlined : styles.titleOutlinedLight}>{title}</Text>
                 </TouchableOpacity>
             )}
         </>
@@ -48,7 +51,13 @@ const styles = StyleSheet.create({
         borderRadius: spacing.S,
     },
     titleOutlined: {
-        color: colors.light.primary,
+        color: colors.dark.primary,
+        fontWeight: '700',
+        textAlign: 'center',
+        paddingVertical: spacing.XL,
+    },
+    titleOutlinedLight: {
+        color: colors.light.black,
         fontWeight: '700',
         textAlign: 'center',
         paddingVertical: spacing.XL,
