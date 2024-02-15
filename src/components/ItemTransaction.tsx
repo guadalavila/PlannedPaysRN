@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Text from './Text';
 import { GlobalStyles } from '~utils/styles';
 import { spacing } from '~utils/spacing';
 import { ITransaction } from '~models/Transaction';
-import { colors } from '~utils/colors';
 import Title from './Title';
 import IconRound from './IconRound';
+import { ThemeContext } from '~contexts/ThemeContext';
 
 interface ItemTransactionProps {
     transaction: ITransaction;
@@ -14,15 +14,17 @@ interface ItemTransactionProps {
 
 const ItemTransaction = ({ transaction }: ItemTransactionProps) => {
     const { category, cuota, reference, amount } = transaction;
-    console.log(category);
+    const { themeApp } = useContext(ThemeContext);
     return (
-        <View style={[styles.container, GlobalStyles.row]}>
+        <View style={[styles.container, GlobalStyles.row, { backgroundColor: themeApp.colors.bgCard }]}>
             <View style={GlobalStyles.row}>
-                <IconRound iconName={category.icon} background={category.color} />
+                <View style={GlobalStyles.alignSelf}>
+                    <IconRound iconName={category.icon} background={category.color} />
+                </View>
                 <View style={{ marginHorizontal: spacing.M }}>
                     <Title text={reference} />
-                    <Text style={styles.cuota}>{cuota.label}</Text>
                     <Text style={{ marginHorizontal: spacing.S }}>22/01/2024</Text>
+                    <Text style={styles.cuota}>{cuota.label}</Text>
                 </View>
             </View>
             <View style={GlobalStyles.alignSelf}>
@@ -36,11 +38,11 @@ export default ItemTransaction;
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: spacing.L,
+        marginVertical: spacing.XS,
         justifyContent: 'space-between',
-        borderBottomWidth: 1,
-        borderBottomColor: colors.light.separator,
-        paddingBottom: spacing.S,
+        paddingBottom: spacing.XS,
+        borderRadius: 10,
+        paddingHorizontal: spacing.XS,
     },
     category: {
         borderRadius: 10,
