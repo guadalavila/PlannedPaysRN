@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from './colors';
+import { spacing } from './spacing';
 
 export const GlobalStyles = StyleSheet.create({
     flex1: {
@@ -37,6 +38,21 @@ export const GlobalStyles = StyleSheet.create({
     },
     alignSelf: {
         alignSelf: 'center',
+    },
+    dropdown: {
+        borderRadius: 8,
+        position: 'relative',
+        marginHorizontal: spacing.L,
+        backgroundColor: 'white',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        marginBottom: spacing.M,
     },
 });
 
