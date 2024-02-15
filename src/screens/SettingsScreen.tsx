@@ -21,7 +21,6 @@ const SettingsScreen = ({}: Props) => {
     const { user, update } = useAuth();
     const { fields, errors, handleSubmit, setFieldValue } = useForm('UpdateUser', () => doUpdate());
     const { setTheme, theme } = useContext(ThemeContext);
-    console.log(theme);
 
     useEffect(() => {
         setFieldValue('name', user.name);
@@ -56,7 +55,7 @@ const SettingsScreen = ({}: Props) => {
             <Input
                 editable={false}
                 value={user.email}
-                placeholder='Nombre'
+                placeholder='Email'
                 keyboardType='default'
                 onChangeText={(value) => {}}
             />
