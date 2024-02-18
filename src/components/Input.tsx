@@ -1,10 +1,12 @@
-import React from 'react';
-import { KeyboardType, StyleSheet, View } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { KeyboardType, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
 import Text from './Text';
 import { typography } from '~utils/typography';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { ThemeContext } from '~contexts/ThemeContext';
 
 interface InputProps {
     value: string;
@@ -71,38 +73,46 @@ const Input = ({
     autocomplete,
     maxLength = undefined,
 }: InputProps) => {
+    const [showText, setShowText] = useState(secureTextEntry);
+    const { themeApp } = useContext(ThemeContext);
     return (
         <View style={[styles.container, isTextArea ? styles.textArea : undefined]}>
-            {/* <Text style={[isTextArea ? styles.labelTextArea : styles.label]}>
+            <Text style={[isTextArea ? styles.labelTextArea : styles.label]}>
                 {placeholder}
                 <Text>{required ? ' *' : ''}</Text>
-            </Text> */}
+            </Text>
             {helperText && <Text style={[styles.helperText, { color: colors.light.primary }]}>{helperText}</Text>}
-            <TextInput
-                returnKeyType='next'
-                secureTextEntry={secureTextEntry}
-                focusable
-                editable={editable}
-                autoComplete={autocomplete}
-                maxLength={maxLength}
-                autoCorrect={false}
-                keyboardType={keyboardType}
-                multiline={isTextArea}
-                numberOfLines={isTextArea ? 4 : 2}
-                placeholderTextColor={colors.light.primary}
-                style={[
-                    styles.input,
-                    isTextArea ? styles.textArea : styles.input,
-                    {
-                        // borderColor: themeApp.colors.backgroundInput,
-                        // color: themeApp.colors.textInput,
-                        // backgroundColor: themeApp.colors.backgroundInput,
-                    },
-                ]}
-                value={value}
-                placeholder={placeholder}
-                onChangeText={onChangeText}
-            />
+            <View>
+                <TextInput
+                    returnKeyType='next'
+                    secureTextEntry={showText}
+                    focusable
+                    editable={editable}
+                    autoComplete={autocomplete}
+                    maxLength={maxLength}
+                    autoCorrect={false}
+                    keyboardType={keyboardType}
+                    multiline={isTextArea}
+                    numberOfLines={isTextArea ? 4 : 2}
+                    placeholderTextColor={colors.light.grey}
+                    style={[
+                        isTextArea ? styles.textArea : styles.input,
+                        {
+                            // borderColor: themeApp.colors.backgroundInput,
+                            color: themeApp.colors.textInput,
+                            backgroundColor: themeApp.colors.bgInput,
+                        },
+                    ]}
+                    value={value}
+                    placeholder={placeholder}
+                    onChangeText={onChangeText}
+                />
+                {secureTextEntry && (
+                    <TouchableOpacity style={styles.icon} activeOpacity={0.7} onPress={() => setShowText(!showText)}>
+                        <Icon name='eye' size={20} color={colors.light.primaryDark} />
+                    </TouchableOpacity>
+                )}
+            </View>
         </View>
     );
 };
@@ -112,14 +122,12 @@ export default Input;
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: spacing.S,
+        marginVertical: spacing.S,
     },
     input: {
         marginHorizontal: spacing.S,
         borderRadius: 10,
         padding: spacing.XL,
-        // borderWidth: 0.4,
-        // borderColor: colors.light.primary,
-        backgroundColor: colors.light.white,
     },
     text: {
         marginHorizontal: spacing.XL,
@@ -128,8 +136,8 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     textArea: {
-        height: 100,
-        marginBottom: 50,
+        height: 40,
+        marginBottom: 10,
     },
     helperText: {
         fontSize: typography.size.XS,
@@ -138,12 +146,17 @@ const styles = StyleSheet.create({
     },
     label: {
         fontWeight: 'bold',
-        marginHorizontal: spacing.S,
+        marginHorizontal: spacing.M,
+        marginBottom: spacing.XS,
     },
     labelTextArea: {
         fontWeight: 'bold',
-        marginHorizontal: spacing.S,
-        paddingTop: spacing.XXL,
-        marginBottom: spacing.S,
+        marginHorizontal: spacing.M,
+        marginBottom: spacing.XS,
+    },
+    icon: {
+        position: 'absolute',
+        right: 20,
+        top: 13,
     },
 });
