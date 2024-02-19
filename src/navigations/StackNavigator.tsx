@@ -5,99 +5,104 @@ import LoginScreen from '~screens/LoginScreen';
 import NewGoalScreen from '~screens/NewGoalScreen';
 import AddCreditCardScreen from '~screens/AddCreditCardScreen';
 import { colors } from '~utils/colors';
-import Loading from '~components/Loading';
 import SignUpScreen from '~screens/SignUpScreen';
 import AddTransactionScreen from '~screens/AddTransactionScreen';
+import IconsScreen from '~screens/IconsScreen';
 
 const StackLoggedIn = createStackNavigator<RootStackLoginParamList>();
 const StackLoggedOut = createStackNavigator<RootStackLogoutParamList>();
 
-export function StackNavigatorLogOut(loading: boolean) {
+export function StackNavigatorLogOut() {
     return (
-        <>
-            {loading ? (
-                <Loading />
-            ) : (
-                <StackLoggedOut.Navigator
-                    initialRouteName={'LoginScreen'}
-                    screenOptions={{
-                        headerStyle: {
-                            backgroundColor: colors.dark.background,
-                        },
-                    }}>
-                    <StackLoggedOut.Screen name={'LoginScreen'} component={LoginScreen} options={{ title: 'Login' }} />
-                    <StackLoggedOut.Screen
-                        name={'SignUpScreen'}
-                        component={SignUpScreen}
-                        options={{
-                            title: 'Registro',
-                            headerBackTitle: ' ',
-                        }}
-                    />
-                </StackLoggedOut.Navigator>
-            )}
-        </>
+        <StackLoggedOut.Navigator
+            initialRouteName={'LoginScreen'}
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: colors.dark.primary,
+                },
+                headerTintColor: colors.light.white,
+            }}>
+            <StackLoggedOut.Screen name={'LoginScreen'} component={LoginScreen} options={{ title: 'Login' }} />
+            <StackLoggedOut.Screen
+                name={'SignUpScreen'}
+                component={SignUpScreen}
+                options={{
+                    title: 'Registro',
+                    headerBackTitle: ' ',
+                }}
+            />
+        </StackLoggedOut.Navigator>
     );
 }
 
-export function StackNavigatorLogIn(loading: boolean) {
+export function StackNavigatorLogIn() {
     return (
-        <>
-            {loading ? (
-                <Loading />
-            ) : (
-                <StackLoggedIn.Navigator
-                    screenOptions={{
-                        headerShown: true,
-                    }}>
-                    <StackLoggedIn.Screen options={{ headerShown: false }} name='Drawer' component={Drawer} />
-                    <StackLoggedIn.Screen
-                        options={{
-                            title: 'Nuevo Objetivo',
-                            headerStyle: {
-                                backgroundColor: colors.light.primary,
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                            headerBackTitle: ' ',
-                        }}
-                        name='NewGoalScreen'
-                        component={NewGoalScreen}
-                    />
-                    <StackLoggedIn.Screen
-                        options={{
-                            title: 'Nueva Tarjeta',
-                            headerStyle: {
-                                backgroundColor: colors.light.primary,
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                            headerBackTitle: ' ',
-                        }}
-                        name='AddCreditCardScreen'
-                        component={AddCreditCardScreen}
-                    />
-                    <StackLoggedIn.Screen
-                        options={{
-                            title: 'Nueva Transacción',
-                            headerStyle: {
-                                backgroundColor: colors.light.primary,
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            },
-                            headerBackTitle: ' ',
-                        }}
-                        name='AddTransactionScreen'
-                        component={AddTransactionScreen}
-                    />
-                </StackLoggedIn.Navigator>
-            )}
-        </>
+        <StackLoggedIn.Navigator
+            screenOptions={{
+                headerShown: true,
+                headerTintColor: 'red',
+            }}>
+            <StackLoggedIn.Screen options={{ headerShown: false }} name='Drawer' component={Drawer} />
+            <StackLoggedIn.Screen
+                options={{
+                    title: 'Nuevo Objetivo',
+                    headerStyle: {
+                        backgroundColor: colors.light.primary,
+                    },
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                    headerBackTitle: ' ',
+                    headerTintColor: '#FFFFFF',
+                }}
+                name='NewGoalScreen'
+                component={NewGoalScreen}
+            />
+            <StackLoggedIn.Screen
+                options={{
+                    title: 'Nueva Tarjeta',
+                    headerStyle: {
+                        backgroundColor: colors.light.primary,
+                    },
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                    headerBackTitle: ' ',
+                    headerTintColor: '#FFFFFF',
+                }}
+                name='AddCreditCardScreen'
+                component={AddCreditCardScreen}
+            />
+            <StackLoggedIn.Screen
+                options={{
+                    title: 'Agregar Gasto',
+                    headerStyle: {
+                        backgroundColor: colors.light.primary,
+                    },
+                    headerTintColor: '#FFFFFF',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                    headerBackTitle: ' ',
+                }}
+                name='AddTransactionScreen'
+                component={AddTransactionScreen}
+            />
+            <StackLoggedIn.Screen
+                options={{
+                    title: 'Iconos',
+                    headerStyle: {
+                        backgroundColor: colors.light.primary,
+                    },
+                    headerTintColor: '#FFFFFF',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                    headerBackTitle: ' ',
+                }}
+                name='IconsScreen'
+                component={IconsScreen}
+            />
+        </StackLoggedIn.Navigator>
     );
 }
