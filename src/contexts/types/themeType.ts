@@ -3,9 +3,18 @@ export type ThemeType = {
         primary: string;
         primaryDark: string;
         secondary: string;
+        success: string;
         tertiary: string;
-        background: string;
+        white: string;
+        black: string;
+        separator: string;
         textPrimary: string;
+        grey: string;
+        error: string;
+        bgInput: string;
+        textInput: string;
+        bgCard: string;
+        background: string;
     };
     typography: {
         size: {
