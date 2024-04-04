@@ -5,6 +5,7 @@ export const AuthContext = React.createContext<{
     user: IUser;
     setUser: React.Dispatch<IUser>;
     isAuthenticated: boolean;
+    updateUser: React.Dispatch<IUser>;
 }>({
     user: {
         name: '',
@@ -15,6 +16,7 @@ export const AuthContext = React.createContext<{
     },
     setUser: () => {},
     isAuthenticated: false,
+    updateUser: () => {},
 });
 
 interface AuthContextProviderProps {
@@ -36,12 +38,17 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
         setIsAuthenticated(true);
     };
 
+    const updateUserApp = (user_: IUser) => {
+        setUser(user_);
+    };
+
     return (
         <AuthContext.Provider
             value={{
                 user: user,
                 setUser: setUserApp,
                 isAuthenticated: isAuthenticated,
+                updateUser: updateUserApp,
             }}>
             {children}
         </AuthContext.Provider>

@@ -1,3 +1,5 @@
+import { ICoin } from '~models/Coin';
+
 export const CATEGORIES = [
     { _id: 1, label: 'Comida', icon: 'fast-food', color: '#49BBA2' },
     { _id: 2, label: 'Transporte', icon: 'car', color: '#EF7261' },
@@ -9,7 +11,7 @@ export const CATEGORIES = [
 ];
 
 export const LIST_COLORS = [
-    '#181d30',
+    '#FCAB10',
     '#2E86AB',
     '#F39237',
     '#8FD694',
@@ -37,7 +39,7 @@ export const LIST_COLORS = [
     '#231651',
     '#9932CC',
     '#FE4A49',
-    '#2A2B2D',
+    '#c5f277',
     '#20B2AA',
     '#5B616A',
     '#609F8B',
@@ -62,7 +64,7 @@ export const LIST_COLORS = [
 ];
 
 export const GRADIENT_COLORS = [
-    ['#A2FFB8', '#7DF098', '#5FC27E', '#3D8E60', '#2D6E4D'],
+    ['#00543E', '#007956', '#008F5E', '#00A668', '#00BD71'],
     ['#FFAAD3', '#FF88C3', '#FF66B2', '#FF4491', '#FF0066'],
     ['#ADD8E6', '#87CEEB', '#6BB8E3', '#4F94CD', '#336699'],
     ['#F8B696', '#F78474', '#F55C5B', '#F33E4E', '#F32945'],
@@ -70,8 +72,55 @@ export const GRADIENT_COLORS = [
     ['#8A2BE2', '#9932CC', '#A020F0', '#800080', '#9400D3'],
     ['#333333', '#555555', '#777777', '#999999', '#BBBBBB'],
     ['#000000', '#111111', '#222222', '#333333', '#444444'],
-    ['#00543E', '#007956', '#008F5E', '#00A668', '#00BD71'],
+    ['#A2FFB8', '#7DF098', '#5FC27E', '#3D8E60', '#2D6E4D'],
     ['#FF4500', '#FF6347', '#FF7F50', '#FF8C00', '#FFA07A'],
     ['#001f3f', '#003366', '#004080', '#00509e', '#0066cc', '#0077b6'],
     ['#990000', '#B22222', '#CC0000', '#DC143C', '#FF0000'],
+];
+
+export const CUOTAS = [
+    {
+        code: '001',
+        label: '1 cuota',
+        value: 1,
+    },
+    {
+        code: '002',
+        label: '2 cuotas',
+        value: 2,
+    },
+    {
+        code: '003',
+        label: '3 cuotas',
+        value: 3,
+    },
+    {
+        code: '006',
+        label: '6 cuotas',
+        value: 6,
+    },
+    {
+        code: '012',
+        label: '12 cuotas',
+        value: 12,
+    },
+    {
+        code: '018',
+        label: '18 cuotas',
+        value: 18,
+    },
+    {
+        code: '000',
+        label: 'Mensual',
+        value: 0,
+    },
+];
+
+export const MOCK_COINS: ICoin[] = [
+    { id: '001', label: 'Peso argentino', codeISO: 'ARS', symbol: '$' },
+    { id: '002', label: 'Euro', codeISO: 'EUR', symbol: '€' },
+    { id: '003', label: 'Dolar', codeISO: 'USD', symbol: 'USD' },
+    { id: '004', label: 'Real', codeISO: 'BRL', symbol: 'BRL' },
+    { id: '005', label: 'Peso mexicano', codeISO: 'MXN', symbol: 'MXN' },
+    { id: '006', label: 'Boliviano', codeISO: 'BOB', symbol: 'BOB' },
 ];

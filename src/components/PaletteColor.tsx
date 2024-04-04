@@ -5,19 +5,23 @@ import { colors } from '~utils/colors';
 import { LIST_COLORS } from '~utils/mock';
 import { spacing } from '~utils/spacing';
 import Item from './Item';
+import { ThemeContext } from '~contexts/ThemeContext';
 
 interface IPaletteColor {
+    onSelect: (color: string) => void;
     colorDefault?: string;
     style?: StyleProp<ViewStyle> | undefined;
 }
 
-const PaletteColor = ({ colorDefault = colors.light.primary, style = {} }: IPaletteColor) => {
+const PaletteColor = ({ onSelect, colorDefault = colors.light.primaryDark, style = {} }: IPaletteColor) => {
     const [colorSelected, setColorSelected] = useState(colorDefault);
     const [showPalette, setShowPalette] = useState(false);
+    const { themeApp } = useContext(ThemeContext);
 
     const onChangeColor = (color: string) => {
         setColorSelected(color);
         setShowPalette(false);
+        onSelect(color);
     };
     return (
         <View style={style}>
@@ -28,7 +32,7 @@ const PaletteColor = ({ colorDefault = colors.light.primary, style = {} }: IPale
                 onPress={() => setShowPalette(!showPalette)}
             />
             {showPalette && (
-                <View style={styles.container}>
+                <View style={[styles.container, { backgroundColor: themeApp.colors.bgInput }]}>
                     {LIST_COLORS.map((color, index) => (
                         <TouchableOpacity
                             key={index}

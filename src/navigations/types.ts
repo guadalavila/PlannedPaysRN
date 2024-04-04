@@ -1,3 +1,5 @@
+import { ICreditCard } from '~models/CreditCard';
+
 export type RootStackLogoutParamList = {
     LoginScreen: undefined;
     SignUpScreen: undefined;
@@ -5,20 +7,24 @@ export type RootStackLogoutParamList = {
 
 export type RootStackLoginParamList = {
     Drawer: undefined;
-    AddCreditCardScreen: undefined;
+    AddCreditCardScreen: { card?: ICreditCard };
     NewGoalScreen: undefined;
-    AddTransactionScreen: undefined;
+    AddTransactionScreen: {
+        card: ICreditCard;
+    };
+    IconsScreen: undefined;
 };
 
 export type DrawerStackList = {
     HomeScreen: undefined;
     CategoriesScreen: undefined;
     SettingsScreen: undefined;
-    ProfileScreen: undefined;
     CreditCardScreen: undefined;
     AddNewExpense: undefined;
     GoalsScreen: undefined;
     NewGoalScreen: undefined;
-    AddCreditCardScreen: undefined;
-    AddTransactionScreen: undefined;
+    AddCreditCardScreen: { card?: ICreditCard };
+    AddTransactionScreen: {
+        card: ICreditCard;
+    };
 };

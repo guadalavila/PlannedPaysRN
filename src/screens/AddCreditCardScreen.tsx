@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackLoginParamList } from '~navigations/types';
 import Container from '~components/Container';
@@ -20,19 +20,36 @@ import { colors } from '~utils/colors';
 
 interface Props extends NativeStackScreenProps<RootStackLoginParamList, 'AddCreditCardScreen'> {}
 
-const AddCreditCardScreen = ({ navigation }: Props) => {
-    const { fields, setFieldValue, handleSubmit, errors } = useForm('NewCreditCard', () => add());
-    const { addCreditCard } = useCreditCard();
+const AddCreditCardScreen = ({ navigation, route }: Props) => {
+    const { fields, setFieldValue, handleSubmit, errors } = useForm('NewCreditCard', () => addOrEdit());
     const [gradientSelected, setGradientSelected] = useState(GRADIENT_COLORS[0]);
+    const [card, setCard] = useState<ICreditCard | undefined>(undefined);
+    const { addCreditCard, updateCreditCard } = useCreditCard();
 
     useEffect(() => {
         setFieldValue('colors', gradientSelected);
+        const card = route.params?.card ?? undefined;
+        console.log(card);
+        card && setValues(card);
     }, []);
 
-    const add = () => {
-        addCreditCard({ ...fields } as ICreditCard).then((id) => {
-            // navigation.goBack();
-        });
+    const setValues = (card: ICreditCard) => {
+        setCard(card);
+        setFieldValue('name', card.name);
+        setFieldValue('number', card.number);
+        setFieldValue('card', card.card);
+        setFieldValue('email', card.email);
+        setFieldValue('description', card.description);
+        setGradientSelected(card.colors);
+        setFieldValue('colors', card.colors);
+    };
+
+    const addOrEdit = () => {
+        if (card === undefined) {
+            addCreditCard({ ...fields } as ICreditCard).then((id) => {});
+        } else {
+            updateCreditCard(card);
+        }
     };
 
     return (
@@ -44,46 +61,50 @@ const AddCreditCardScreen = ({ navigation }: Props) => {
                     card={fields.card}
                     numbers={fields.number}
                 />
-                <FlatList
-                    showsHorizontalScrollIndicator={false}
-                    horizontal
-                    data={GRADIENT_COLORS}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item, index }) => (
-                        <TouchableOpacity
-                            activeOpacity={0.7}
-                            onPress={() => {
-                                setGradientSelected(GRADIENT_COLORS[index]);
-                                setFieldValue('colors', GRADIENT_COLORS[index]);
-                            }}>
-                            <LinearGradient
-                                style={styles.listColors}
-                                start={{ x: 0.3, y: 0 }}
-                                end={{ x: 0.5, y: 1 }}
-                                colors={item}>
-                                {item === gradientSelected && (
-                                    <Icon
-                                        style={GlobalStyles.alignSelf}
-                                        name='checkmark'
-                                        color={colors.light.white}
-                                        size={24}
-                                    />
-                                )}
-                            </LinearGradient>
-                        </TouchableOpacity>
-                    )}
-                />
-                <Dropdown
-                    placeholder='Seleccione Tarjeta'
-                    onSelectCard={(cardSelected) => setFieldValue('card', cardSelected)}
-                />
-                {errors.card && <TextError text={errors.card} />}
+                {card === undefined && (
+                    <>
+                        <FlatList
+                            showsHorizontalScrollIndicator={false}
+                            horizontal
+                            data={GRADIENT_COLORS}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={({ item, index }) => (
+                                <TouchableOpacity
+                                    activeOpacity={0.7}
+                                    onPress={() => {
+                                        setGradientSelected(GRADIENT_COLORS[index]);
+                                        setFieldValue('colors', GRADIENT_COLORS[index]);
+                                    }}>
+                                    <LinearGradient
+                                        style={styles.listColors}
+                                        start={{ x: 0.3, y: 0 }}
+                                        end={{ x: 0.5, y: 1 }}
+                                        colors={item}>
+                                        {item === gradientSelected && (
+                                            <Icon
+                                                style={GlobalStyles.alignSelf}
+                                                name='checkmark'
+                                                color={colors.light.white}
+                                                size={24}
+                                            />
+                                        )}
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                            )}
+                        />
+                        <Dropdown
+                            placeholder='Seleccione Tarjeta'
+                            onSelectCard={(cardSelected) => setFieldValue('card', cardSelected)}
+                        />
+                        {errors.card && <TextError text={errors.card} />}
+                    </>
+                )}
                 <Input
                     maxLength={25}
                     value={fields.name}
                     placeholder='Nombre'
                     keyboardType='default'
-                    onChangeText={(value) => setFieldValue('name', value)}
+                    onChangeText={(value) => setFieldValue('name', value.toUpperCase())}
                 />
                 {errors.name && <TextError text={errors.name} />}
                 <Input
@@ -98,10 +119,9 @@ const AddCreditCardScreen = ({ navigation }: Props) => {
                     value={fields.description}
                     placeholder='Descripción'
                     keyboardType='default'
-                    isTextArea
                     onChangeText={(value) => setFieldValue('description', value)}
                 />
-                <Button title='Agregar' onPress={handleSubmit} />
+                <Button title={card === undefined ? 'Agregar' : 'Editar'} onPress={handleSubmit} />
             </ScrollView>
         </Container>
     );
@@ -116,5 +136,20 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         borderRadius: 10,
+    },
+    dropdown: {
+        borderRadius: 8,
+        position: 'relative',
+        marginHorizontal: spacing.L,
+        backgroundColor: 'white',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        marginBottom: spacing.M,
     },
 });

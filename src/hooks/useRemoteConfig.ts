@@ -5,7 +5,7 @@ import { RemoteConfigContext } from '~contexts/RemoteConfigContext';
 import { ICard } from '~models/Card';
 
 function useRemoteConfig() {
-    const { setCategories, setCards, setTokenLogin } = useContext(RemoteConfigContext);
+    const { setCategories, setCards, setTokenLogin, categories } = useContext(RemoteConfigContext);
 
     useEffect(() => {
         remoteConfig()
@@ -40,5 +40,7 @@ function useRemoteConfig() {
                 }
             });
     }, []);
+
+    return { categories };
 }
 export default useRemoteConfig;

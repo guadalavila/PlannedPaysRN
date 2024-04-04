@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
-import { GlobalStyles } from '~utils/styles';
+import IconRound from './IconRound';
 
 interface IconButtonProps {
     icon: string;
@@ -18,11 +17,14 @@ const IconButton = ({
     backgroundColor = '#f6f8fa',
 }: IconButtonProps) => {
     return (
-        <TouchableOpacity
-            style={[styles.container, { backgroundColor: backgroundColor }]}
-            activeOpacity={0.7}
-            onPress={onPress}>
-            <Icon style={GlobalStyles.alignSelf} name={icon} size={20} color={colorIcon} />
+        <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+            <IconRound
+                style={styles.item}
+                background={backgroundColor}
+                iconName={icon}
+                iconSize={22}
+                iconColor={colorIcon}
+            />
         </TouchableOpacity>
     );
 };
@@ -30,10 +32,7 @@ const IconButton = ({
 export default IconButton;
 
 const styles = StyleSheet.create({
-    container: {
-        borderRadius: 30,
-        // width: '18%',
-        padding: spacing.XXL,
-        margin: spacing.S,
+    item: {
+        marginHorizontal: spacing.M,
     },
 });

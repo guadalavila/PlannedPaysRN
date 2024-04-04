@@ -3,7 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import Container from '~components/Container';
 import { DrawerStackList } from '~navigations/types';
-import { ICreditCardResponse } from '~models/CreditCard';
+import { ICreditCard } from '~models/CreditCard';
 import Fab from '~components/Fab';
 import EmptyState from '~components/EmptyState';
 import useCreditCard from '~hooks/useCreditCard';
@@ -12,18 +12,45 @@ import Title from '~components/Title';
 import { spacing } from '~utils/spacing';
 import IconButton from '~components/IconButton';
 import Modal from '~components/Modal';
+import ItemTransaction from '~components/ItemTransaction';
+import useRemoteConfig from '~hooks/useRemoteConfig';
+import { ITransaction } from '~models/Transaction';
+import Loading from '~components/Loading';
+import { typography } from '~utils/typography';
+import { colors } from '~utils/colors';
+import Text from '~components/Text';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'CreditCardScreen'> {}
 const CreditCardScreen = ({ navigation }: Props) => {
-    const [cards, setCards] = useState<ICreditCardResponse[]>([]);
+    const [cards, setCards] = useState<ICreditCard[]>([]);
     const { width } = Dimensions.get('window');
     const [selectedCardIndex, setSelectedCardIndex] = useState(0);
-    const { getCreditCards, deleteCreditCard } = useCreditCard();
+    const { getCreditCards, deleteCreditCard, getTransactions } = useCreditCard();
     const [showModal, setShowModal] = useState(false);
+    const [transactions, setTransactions] = useState<ITransaction[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        getCreditCards().then((data) => setCards(data as ICreditCardResponse[]));
+        getCreditCards().then((data) => setCards(data as ICreditCard[]));
     }, []);
+
+    useEffect(() => {
+        getTransactions_();
+    }, [cards]);
+
+    useEffect(() => {
+        getTransactions_();
+    }, [selectedCardIndex]);
+
+    const getTransactions_ = () => {
+        if (cards.length > 0) {
+            setIsLoading(true);
+            getTransactions(cards[selectedCardIndex].id).then((result) => {
+                setTransactions(result as ITransaction[]);
+                setIsLoading(false);
+            });
+        }
+    };
 
     const handleScroll = (event: any) => {
         const contentOffset = event.nativeEvent.contentOffset.x;
@@ -35,6 +62,7 @@ const CreditCardScreen = ({ navigation }: Props) => {
 
     const onEditCard = () => {
         console.log('You wanna edit card: ' + cards[selectedCardIndex].id);
+        navigation.navigate('AddCreditCardScreen', { card: cards[selectedCardIndex] });
     };
 
     const onDeleteCard = () => {
@@ -54,7 +82,7 @@ const CreditCardScreen = ({ navigation }: Props) => {
                         showsHorizontalScrollIndicator={false}
                         automaticallyAdjustContentInsets={true}
                         decelerationRate={0}
-                        snapToInterval={Dimensions.get('window').width}
+                        snapToInterval={Dimensions.get('window').width * 0.9}
                         snapToAlignment={'center'}
                         renderItem={({ item }) => (
                             <View
@@ -78,6 +106,27 @@ const CreditCardScreen = ({ navigation }: Props) => {
                     </View>
                     <View style={styles.containerTransactions}>
                         <Title text='Transacciones'></Title>
+                        {isLoading ? (
+                            <View style={{ position: 'relative', top: 100 }}>
+                                <Loading />
+                            </View>
+                        ) : (
+                            <View>
+                                {transactions.length > 0 ? (
+                                    <FlatList
+                                        scrollEnabled
+                                        data={transactions}
+                                        renderItem={({ item }) => (
+                                            <ItemTransaction key={item.cardId} transaction={item} />
+                                        )}
+                                    />
+                                ) : (
+                                    <View style={{ position: 'relative', top: 100 }}>
+                                        <Text style={styles.textNoTrx}>{'No hay movimientos'}</Text>
+                                    </View>
+                                )}
+                            </View>
+                        )}
                     </View>
                     <Modal
                         visible={showModal}
@@ -90,7 +139,12 @@ const CreditCardScreen = ({ navigation }: Props) => {
                     />
                 </View>
             )}
-            <Fab icon='add' onPress={() => navigation.navigate('AddTransactionScreen')} />
+            {cards.length > 0 && (
+                <Fab
+                    icon='add'
+                    onPress={() => navigation.navigate('AddTransactionScreen', { card: cards[selectedCardIndex] })}
+                />
+            )}
         </Container>
     );
 };
@@ -100,11 +154,19 @@ export default CreditCardScreen;
 const styles = StyleSheet.create({
     flatListContainer: {},
     containerTransactions: {
-        marginHorizontal: spacing.M,
+        marginHorizontal: spacing.S,
     },
     containerOptions: {
         flexDirection: 'row',
         justifyContent: 'center',
         marginVertical: spacing.S,
+    },
+    textNoTrx: {
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+        fontWeight: '600',
+        fontSize: typography.size.L,
+        color: colors.light.primary,
     },
 });

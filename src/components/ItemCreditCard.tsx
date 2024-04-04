@@ -5,10 +5,10 @@ import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
 import Text from './Text';
 import { SvgUri } from 'react-native-svg';
-import { BRAND_CARD } from '~models/Card';
+import { ICard } from '~models/Card';
 
 interface ItemCreditCardProps {
-    onPress: (brand: BRAND_CARD) => void;
+    onPress: (brand: ICard) => void;
 }
 
 const ItemCreditCard = ({ onPress }: ItemCreditCardProps) => {
@@ -21,7 +21,7 @@ const ItemCreditCard = ({ onPress }: ItemCreditCardProps) => {
                         key={card.id}
                         style={styles.item}
                         activeOpacity={0.7}
-                        onPress={() => onPress(card.brand)}>
+                        onPress={() => onPress(card)}>
                         <SvgUri style={styles.svg} uri={card.img} width={40} height={40} />
                         <Text style={styles.brand}>{card.brand}</Text>
                     </TouchableOpacity>
@@ -36,14 +36,14 @@ export default ItemCreditCard;
 const styles = StyleSheet.create({
     item: {
         borderBottomColor: colors.light.separator,
-        borderBottomWidth: 0.5,
-        paddingVertical: spacing.XL,
+        borderBottomWidth: 0.25,
+        paddingVertical: spacing.M,
         paddingHorizontal: spacing.L,
         flexDirection: 'row',
     },
     brand: {
         alignSelf: 'center',
-        color: colors.light.primary,
+        // color: colors.light.primaryDark,
         fontWeight: '500',
     },
     svg: {

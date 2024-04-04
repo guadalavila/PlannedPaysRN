@@ -3,17 +3,23 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Text from './Text';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
-import { typography } from '~utils/typography';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface ICheckBoxProps {
     label: string;
+    onChange(value: boolean): void;
 }
 
-const CheckBox = ({ label }: ICheckBoxProps) => {
+const CheckBox = ({ label, onChange }: ICheckBoxProps) => {
     const [selected, setSelected] = useState(false);
+
+    const onSelected = () => {
+        setSelected(!selected);
+        onChange(!selected);
+    };
+
     return (
-        <TouchableOpacity style={styles.container} activeOpacity={0.7} onPress={() => setSelected(!selected)}>
+        <TouchableOpacity style={styles.container} activeOpacity={0.7} onPress={onSelected}>
             <Text style={styles.text}>{label}</Text>
             <View style={styles.containerIcon}>
                 {selected ? <Icon name='checkmark-outline' size={24} color={colors.light.success} /> : <View />}
@@ -29,13 +35,12 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light.white,
         marginHorizontal: spacing.L,
         paddingHorizontal: spacing.L,
-        paddingVertical: spacing.XL,
+        paddingVertical: spacing.L,
         borderRadius: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     text: {
-        fontSize: typography.size.M,
         alignSelf: 'center',
     },
     containerIcon: {

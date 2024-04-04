@@ -1,9 +1,10 @@
-import { ICreditCard } from '~models/CreditCard';
+import { ICreditCard, ICreditCardRqst } from '~models/CreditCard';
 import firestore from '@react-native-firebase/firestore';
 import useAuth from './useAuth';
 import { StateContext } from '~contexts/StateContext';
 import { useContext } from 'react';
 import { getIdByDate } from '~utils/helpers';
+import { ITransaction } from '~models/Transaction';
 
 function useCreditCard() {
     const { user } = useAuth();
@@ -12,8 +13,9 @@ function useCreditCard() {
     const getCreditCards = async () => {
         return new Promise(async (resolve, reject) => {
             await firestore()
-                .collection('cards')
-                .where(firestore.Filter('email', '==', user.email))
+                .collection(`cards_${user.email}`)
+                // .collection('')
+                // .where(firestore.Filter('email', '==', user.email))
                 .get()
                 .then((cards) => {
                     const cardsData = cards.docs.map((doc) => doc.data());
@@ -22,7 +24,7 @@ function useCreditCard() {
         });
     };
 
-    const addCreditCard = async (data: ICreditCard) => {
+    const addCreditCard = async (data: ICreditCardRqst) => {
         return new Promise(async (resolve, reject) => {
             try {
                 setLoading(true);
@@ -34,7 +36,7 @@ function useCreditCard() {
                 //     });
                 const id = getIdByDate();
                 const card_ = await firestore()
-                    .collection('cards')
+                    .collection(`cards_${user.email}`)
                     .doc(id)
                     .set({
                         ...data,
@@ -50,10 +52,21 @@ function useCreditCard() {
         });
     };
 
+    const updateCreditCard = async (card: ICreditCard) => {
+        try {
+            setLoading(true);
+            await firestore().collection(`cards_${user.email}`).doc(card.id).update(card);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    };
+
     const deleteCreditCard = async (id: string) => {
         try {
             setLoading(true);
-            const doc = firestore().collection('cards').doc(id);
+            const doc = firestore().collection(`cards_${user.email}`).doc(id);
             await doc.delete();
             setLoading(false);
             console.log('Documento eliminado correctamente.');
@@ -63,6 +76,37 @@ function useCreditCard() {
         }
     };
 
-    return { addCreditCard, getCreditCards, deleteCreditCard };
+    const addTransaction = (data: ITransaction) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                setLoading(true);
+                const trx = await firestore()
+                    .collection(`cards_${user.email}`)
+                    .doc(data.cardId)
+                    .collection('transactions')
+                    .add(data);
+                setLoading(false);
+                resolve(trx);
+            } catch (error) {
+                setLoading(false);
+            }
+        });
+    };
+
+    const getTransactions = (cardId: string) => {
+        return new Promise(async (resolve, reject) => {
+            await firestore()
+                .collection(`cards_${user.email}`)
+                .doc(cardId)
+                .collection('transactions')
+                .get()
+                .then((transactions) => {
+                    const data = transactions.docs.map((doc) => doc.data());
+                    resolve(data);
+                });
+        });
+    };
+
+    return { addCreditCard, getCreditCards, deleteCreditCard, addTransaction, getTransactions, updateCreditCard };
 }
 export default useCreditCard;

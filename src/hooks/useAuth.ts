@@ -3,10 +3,11 @@ import { StateContext } from '~contexts/StateContext';
 import { IUser } from '~models/User';
 import firestore from '@react-native-firebase/firestore';
 import { AuthContext } from '~contexts/AuthContext';
+import { encrypt } from '~utils/encrypt';
 
 function useAuth() {
     const { setLoading } = useContext(StateContext);
-    const { isAuthenticated, setUser } = useContext(AuthContext);
+    const { isAuthenticated, setUser, user, updateUser } = useContext(AuthContext);
 
     const signUp = async (data: IUser) => {
         try {
@@ -32,7 +33,7 @@ function useAuth() {
             const querySnapshot = await firestore()
                 .collection('users')
                 .where(firestore.Filter('email', '==', email))
-                .where('password', '==', password)
+                .where('password', '==', encrypt(password))
                 .get();
             const userDocuments = querySnapshot.docs.map((doc) => doc.data());
             setLoading(false);
@@ -46,6 +47,22 @@ function useAuth() {
             console.log(error);
         }
     };
-    return { signUp, login, isAuthenticated };
+
+    const update = async (name: string, lastName: string) => {
+        try {
+            setLoading(true);
+            await firestore()
+                .collection('users')
+                .doc(user.email)
+                .update({ ...user, name: name, lastName: lastName });
+            updateUser({ ...user, name: name, lastName: lastName });
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    };
+
+    return { signUp, login, isAuthenticated, user, update };
 }
 export default useAuth;

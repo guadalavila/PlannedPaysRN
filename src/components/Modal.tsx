@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Overlay from './Overlay';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '~utils/colors';
@@ -7,6 +7,8 @@ import { GlobalStyles } from '~utils/styles';
 import { spacing } from '~utils/spacing';
 import Button from './Button';
 import { typography } from '~utils/typography';
+import { ThemeContext } from '~contexts/ThemeContext';
+import Text from './Text';
 
 interface IModalProps {
     icon: string;
@@ -19,10 +21,14 @@ interface IModalProps {
 }
 
 const Modal = ({ icon, title, onPress, onCancel, textButton, visible = false, subtitle }: IModalProps) => {
+    const { themeApp } = useContext(ThemeContext);
     return (
         <>
             {visible ? (
-                <Overlay isVisible backdropStyle={styles.backdrop} overlayStyle={[styles.overlay]}>
+                <Overlay
+                    isVisible
+                    backdropStyle={[styles.backdrop]}
+                    overlayStyle={[styles.overlay, { backgroundColor: themeApp.colors.bgCard }]}>
                     <View style={styles.container}>
                         <TouchableOpacity activeOpacity={0.7} style={styles.containerClose} onPress={onCancel}>
                             <Icon name='close-outline' color={colors.light.primaryDark} size={26} />
@@ -49,7 +55,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(42, 42, 60, 0.45)',
     },
     overlay: {
-        top: '50%',
+        top: '30%',
         position: 'absolute',
         borderRadius: 14,
         width: '85%',
@@ -62,7 +68,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.39,
         shadowRadius: 8.3,
         elevation: 13,
-        backgroundColor: 'white',
     },
     container: {
         marginVertical: spacing.XL,
@@ -73,7 +78,6 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: '500',
         fontSize: typography.size.XL,
-        color: colors.light.black,
         textAlign: 'center',
     },
     subtitle: {

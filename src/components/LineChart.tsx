@@ -1,9 +1,10 @@
-import React from 'react';
-import { Dimensions, View } from 'react-native';
+import React, { useContext } from 'react';
+import { Dimensions } from 'react-native';
 import { LineChart as LineChartKit } from 'react-native-chart-kit';
-import { colors } from '~utils/colors';
 import { hexToRGB } from '~utils/helpers';
 import Card from './Card';
+import { ThemeContext } from '~contexts/ThemeContext';
+import { colors } from '~utils/colors';
 
 interface ILineChart {
     title: string;
@@ -12,8 +13,9 @@ interface ILineChart {
     color?: string;
 }
 
-const LineChart = ({ title, labels, data, color = '#2C3D63' }: ILineChart) => {
+const LineChart = ({ title, labels, data, color = colors.light.primary }: ILineChart) => {
     const { width } = Dimensions.get('window');
+    const { themeApp } = useContext(ThemeContext);
 
     const dataLine = {
         labels: labels,
@@ -39,12 +41,12 @@ const LineChart = ({ title, labels, data, color = '#2C3D63' }: ILineChart) => {
                 yAxisSuffix='$'
                 yAxisInterval={1}
                 chartConfig={{
-                    backgroundGradientFrom: colors.light.white,
-                    backgroundGradientTo: colors.light.white,
-                    backgroundColor: colors.light.white,
+                    backgroundGradientFrom: themeApp.colors.bgCard,
+                    backgroundGradientTo: themeApp.colors.bgCard,
+                    backgroundColor: themeApp.colors.bgCard,
                     decimalPlaces: 0,
                     color: () => hexToRGB(color),
-                    labelColor: () => colors.light.primary,
+                    labelColor: () => themeApp.colors.textInput,
                     style: {
                         borderRadius: 16,
                     },

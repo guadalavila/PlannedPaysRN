@@ -18,7 +18,7 @@ interface IUseFormReturn {
 }
 
 const useForm = (
-    form: 'NewCreditCard' | 'SignUpForm' | 'LoginForm' | 'UpdateUser',
+    form: 'NewCreditCard' | 'SignUpForm' | 'LoginForm' | 'UpdateUser' | 'NewGoalForm' | 'AddTransactionForm',
     onSubmit: (fields: IFormFields) => void,
 ): IUseFormReturn => {
     const { tokenLogin } = useContext(RemoteConfigContext);
@@ -42,6 +42,10 @@ const useForm = (
             validateLogin();
         } else if (form === 'UpdateUser') {
             validateUpdateUser();
+        } else if (form === 'NewGoalForm') {
+            validateNewGoalForm();
+        } else if (form === 'AddTransactionForm') {
+            validateAddTransaction();
         }
         // setErrors(formErrors);
 
@@ -141,6 +145,57 @@ const useForm = (
         } else if (!fields.lastName) {
             setErrors({
                 lastName: 'Debes ingresar un apellido ',
+            });
+        } else {
+            setErrors({});
+            onSubmit(fields);
+        }
+    };
+
+    const validateNewGoalForm = () => {
+        if (!fields.title) {
+            setErrors({
+                title: 'Debes ingresar un título',
+            });
+        } else if (!fields.amountTotal) {
+            setErrors({
+                amountTotal: 'Debes ingresar un monto',
+            });
+        } else if (!fields.coin) {
+            setErrors({
+                coin: 'Debes seleccionar una moneda',
+            });
+        } else if (!fields.icon) {
+            setErrors({
+                icon: 'Debes seleccionar un icono',
+            });
+        } else if (!fields.color) {
+            setErrors({
+                color: 'Debes seleccionar un color',
+            });
+        } else {
+            setErrors({});
+            onSubmit(fields);
+        }
+    };
+
+    const validateAddTransaction = () => {
+        console.log(fields);
+        if (!fields.amount) {
+            setErrors({
+                amount: 'Debes ingresar un monto',
+            });
+        } else if (!fields.reference) {
+            setErrors({
+                reference: 'Debes ingresar una referencia',
+            });
+        } else if (!fields.cuota) {
+            setErrors({
+                cuota: 'Debes seleccionar la cantidad de cuotas',
+            });
+        } else if (!fields.category) {
+            setErrors({
+                category: 'Debes seleccionar una categoria',
             });
         } else {
             setErrors({});

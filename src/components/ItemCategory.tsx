@@ -1,14 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { ThemeContext } from '~contexts/ThemeContext';
 import { ICategory } from '~models/Category';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
 import { GlobalStyles } from '~utils/styles';
+import Text from './Text';
 
 const ItemCategory = ({ icon, color, label }: ICategory) => {
+    const { themeApp } = useContext(ThemeContext);
     return (
-        <View style={[styles.item, GlobalStyles.row]}>
+        <View style={[styles.item, GlobalStyles.row, { backgroundColor: themeApp.colors.bgInput }]}>
             <View style={[styles.avatar, { backgroundColor: color }]}>
                 <Icon name={icon} size={22} color={colors.light.white} />
             </View>
@@ -21,11 +24,8 @@ export default ItemCategory;
 
 const styles = StyleSheet.create({
     item: {
-        borderBottomWidth: 1,
-        borderBottomColor: colors.light.separator,
         padding: spacing.L,
-        marginVertical: spacing.S,
-        backgroundColor: colors.light.white,
+        marginVertical: spacing.XS,
         marginHorizontal: spacing.L,
         borderRadius: 8,
         shadowColor: '#000',

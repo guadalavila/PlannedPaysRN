@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { colors } from '~utils/colors';
 import { spacing } from '~utils/spacing';
@@ -6,28 +6,36 @@ import Text from './Text';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { GlobalStyles } from '~utils/styles';
 import ItemCreditCard from './ItemCreditCard';
-import { BRAND_CARD } from '~models/Card';
+import { ICard } from '~models/Card';
+import { ThemeContext } from '~contexts/ThemeContext';
 
 interface IDropdownProps {
     placeholder: string;
+    onSelectCard: (card: ICard) => void;
 }
 
-const Dropdown = ({ placeholder }: IDropdownProps) => {
+const Dropdown = ({ placeholder, onSelectCard }: IDropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [cardSelected, setCardSelected] = useState<BRAND_CARD | undefined>(undefined);
+    const { themeApp } = useContext(ThemeContext);
+    const [cardSelected, setCardSelected] = useState<ICard | undefined>(undefined);
 
-    const onSelect = (brand: BRAND_CARD) => {
-        setCardSelected(brand);
+    const onSelect = (card: ICard) => {
+        setCardSelected(card);
         setIsOpen(!isOpen);
+        onSelectCard(card);
     };
 
     return (
         <>
             <TouchableOpacity
-                style={[styles.container, !isOpen ? { marginBottom: spacing.L } : null]}
+                style={[
+                    styles.container,
+                    { backgroundColor: themeApp.colors.bgInput },
+                    !isOpen ? { marginBottom: spacing.L } : null,
+                ]}
                 activeOpacity={0.7}
                 onPress={() => setIsOpen(!isOpen)}>
-                <Text style={GlobalStyles.alignSelf}>{cardSelected ?? placeholder}</Text>
+                <Text style={GlobalStyles.alignSelf}>{cardSelected?.brand ?? placeholder}</Text>
                 {isOpen ? (
                     <Icon name='chevron-up-outline' color={colors.light.primary} size={22} />
                 ) : (
@@ -35,8 +43,8 @@ const Dropdown = ({ placeholder }: IDropdownProps) => {
                 )}
             </TouchableOpacity>
             {isOpen && (
-                <View style={styles.dropdown}>
-                    <ItemCreditCard onPress={(brand) => onSelect(brand)} />
+                <View style={[styles.dropdown, { backgroundColor: themeApp.colors.bgInput }]}>
+                    <ItemCreditCard onPress={(card) => onSelect(card)} />
                 </View>
             )}
         </>
