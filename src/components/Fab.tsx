@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     container: {
         position: 'absolute',
         right: 20,
-        bottom: 0,
+        bottom: 10,
     },
 });

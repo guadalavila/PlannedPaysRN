@@ -9,8 +9,8 @@ import SignUpScreen from '~screens/SignUpScreen';
 import AddTransactionScreen from '~screens/AddTransactionScreen';
 import IconsScreen from '~screens/IconsScreen';
 
-const StackLoggedIn = createStackNavigator<RootStackLoginParamList>();
-const StackLoggedOut = createStackNavigator<RootStackLogoutParamList>();
+const StackLoggedIn = createStackNavigator();
+const StackLoggedOut = createStackNavigator();
 
 export function StackNavigatorLogOut() {
     return (
@@ -43,7 +43,7 @@ export function StackNavigatorLogIn() {
                 headerTintColor: 'red',
             }}>
             <StackLoggedIn.Screen options={{ headerShown: false }} name='Drawer' component={Drawer} />
-            <StackLoggedIn.Screen
+            {/* <StackLoggedIn.Screen
                 options={{
                     title: 'Nuevo Objetivo',
                     headerStyle: {
@@ -102,7 +102,7 @@ export function StackNavigatorLogIn() {
                 }}
                 name='IconsScreen'
                 component={IconsScreen}
-            />
+            /> */}
         </StackLoggedIn.Navigator>
     );
 }

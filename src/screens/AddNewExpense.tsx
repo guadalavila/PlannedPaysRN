@@ -5,6 +5,7 @@ import { DrawerStackList } from '~navigations/types';
 import { TextInput } from 'react-native-gesture-handler';
 import Button from '~components/Button';
 import Container from '~components/Container';
+import Header from '~components/Header';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'AddNewExpense'> {}
 
@@ -13,6 +14,7 @@ const AddNewExpense = ({}: Props) => {
 
     return (
         <Container>
+            <Header title='Nuevo Gasto' showBack />
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeNumber}

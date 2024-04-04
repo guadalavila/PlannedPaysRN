@@ -5,6 +5,7 @@ import { GlobalStyles } from '~utils/styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Loading from './Loading';
 import { StateContext } from '~contexts/StateContext';
+import Header from './Header';
 
 interface IContainerProps {
     children: React.ReactNode;
@@ -21,7 +22,8 @@ const Container = ({ children }: IContainerProps) => {
     return (
         <>
             <StatusBar translucent barStyle={'light-content'} />
-            <View style={[styles.container, { backgroundColor: colors.background, paddingBottom: bottom }]}>
+            <View style={{ height: top, backgroundColor: colors.primary }} />
+            <View style={[styles.container, { backgroundColor: colors.background }]}>
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
                     <View style={GlobalStyles.flex1}>{loading ? <Loading /> : children}</View>
                 </KeyboardAvoidingView>

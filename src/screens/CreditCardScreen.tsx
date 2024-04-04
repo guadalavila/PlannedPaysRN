@@ -19,6 +19,7 @@ import Loading from '~components/Loading';
 import { typography } from '~utils/typography';
 import { colors } from '~utils/colors';
 import Text from '~components/Text';
+import Header from '~components/Header';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'CreditCardScreen'> {}
 const CreditCardScreen = ({ navigation }: Props) => {
@@ -72,6 +73,7 @@ const CreditCardScreen = ({ navigation }: Props) => {
 
     return (
         <Container>
+            <Header title='Tarjetas' />
             {cards.length === 0 ? (
                 <EmptyState title={'No tenes tarjetas agregadas'} icon='card-outline' />
             ) : (

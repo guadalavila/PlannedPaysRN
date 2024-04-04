@@ -12,4 +12,9 @@ export const STRINGS = {
     HOME: {
         still_to_be_paid: 'Pendientes de Pago',
     },
+    BOTTOM_TAB: {
+        home: 'Home',
+        card: 'Tarjetas',
+        setting: 'Configuración',
+    },
 };

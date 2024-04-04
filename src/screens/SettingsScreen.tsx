@@ -14,6 +14,7 @@ import useForm from '~hooks/useForm';
 import TextError from '~components/TextError';
 import Select from '~components/Select';
 import { ThemeContext } from '~contexts/ThemeContext';
+import Header from '~components/Header';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'SettingsScreen'> {}
 
@@ -32,6 +33,7 @@ const SettingsScreen = ({}: Props) => {
     };
     return (
         <Container>
+            <Header title='Configuración' />
             <View style={styles.avatar}>
                 <Text style={styles.textAvatar}>
                     {user.name.charAt(0).toUpperCase()}

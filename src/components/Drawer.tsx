@@ -9,12 +9,14 @@ import { STRINGS } from '~utils/strings';
 import { colors } from '~utils/colors';
 import CreditCardScreen from '~screens/CreditCardScreen';
 import GoalsScreen from '~screens/GoalsScreen';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { spacing } from '~utils/spacing';
 import { ThemeContext } from '~contexts/ThemeContext';
 
-const DrawerStack = createDrawerNavigator<DrawerStackList>();
+import DashboardScreen from '~screens/DashboardScreen';
+
+const DrawerStack = createDrawerNavigator();
 
 const Drawer = ({ navigation }) => {
     const { themeApp } = useContext(ThemeContext);
@@ -24,10 +26,12 @@ const Drawer = ({ navigation }) => {
                 ...headerStyle,
                 drawerActiveTintColor: colors.light.primary,
                 drawerInactiveTintColor: themeApp.colors.textInput,
+                headerShown: false,
                 drawerStyle: { backgroundColor: themeApp.colors.background },
             }}>
-            <DrawerStack.Screen options={{ title: STRINGS.DRAWER.home }} name='HomeScreen' component={HomeScreen} />
-            <DrawerStack.Screen
+            <DrawerStack.Screen options={{ title: '' }} name='DashboardScreen' component={DashboardScreen} />
+
+            {/* <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.categories }}
                 name='CategoriesScreen'
                 component={CategoriesScreen}
@@ -47,18 +51,18 @@ const Drawer = ({ navigation }) => {
                 name='CreditCardScreen'
                 component={CreditCardScreen}
             />
-            <DrawerStack.Screen options={{ title: STRINGS.DRAWER.goals }} name='GoalsScreen' component={GoalsScreen} />
+            <DrawerStack.Screen options={{ title: STRINGS.DRAWER.goals }} name='GoalsScreen' component={GoalsScreen} /> */}
             {/* <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.newExpense }}
                 name='AddNewExpense'
                 component={AddNewExpense}
             /> */}
 
-            <DrawerStack.Screen
+            {/* <DrawerStack.Screen
                 options={{ title: STRINGS.DRAWER.settings }}
                 name='SettingsScreen'
                 component={SettingsScreen}
-            />
+            /> */}
         </DrawerStack.Navigator>
     );
 };

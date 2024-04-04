@@ -11,6 +11,8 @@ import LineChart from '~components/LineChart';
 import { getColor } from '~utils/helpers';
 import { encrypt } from '~utils/encrypt';
 import Text from '~components/Text';
+import Fab from '~components/Fab';
+import Header from '~components/Header';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'HomeScreen'> {}
 
@@ -75,6 +77,7 @@ const HomeScreen = ({ navigation }: Props) => {
 
     return (
         <Container>
+            <Header title='Home' />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Card title='Tendencia de equilibrio'>
                     <Text>sdas</Text>
@@ -106,6 +109,7 @@ const HomeScreen = ({ navigation }: Props) => {
                     color='#F3780C'
                 />
             </ScrollView>
+            <Fab icon='add' onPress={() => navigation.navigate('AddNewExpense')} />
         </Container>
     );
 };
