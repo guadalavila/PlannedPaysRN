@@ -1,11 +1,11 @@
 const common = {
     // primary: '#c5f277',
     // primaryDark: '#B3D578',
-    primary: '#FCAB10',
-    primaryDark: '#FCAB10',
-    secondary: '#4CE364',
+    primary: '#0b9b8a',
+    primaryDark: '#0b9b8a',
+    secondary: '#f9c975',
     success: '#4CE364',
-    tertiary: '#FFC700',
+    tertiary: '#f596a1',
     white: '#FFFFFF',
     black: '#000000',
     separator: '#D1D1D1',
@@ -24,8 +24,8 @@ const light = {
 
 const dark = {
     ...common,
-    background: '#181818',
-    bgInput: '#252525',
+    background: '#15142a',
+    bgInput: '#24263a',
     textInput: '#FAFAFA',
     bgCard: '#252525',
     textPrimary: '#FAFAFA',

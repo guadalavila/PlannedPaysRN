@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         paddingVertical: spacing.XL,
     },
     outlined: {
-        borderColor: colors.light.primary,
+        borderColor: colors.light.secondary,
         marginVertical: spacing.L,
         marginHorizontal: spacing.S,
         borderRadius: spacing.S,

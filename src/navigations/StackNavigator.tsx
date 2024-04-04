@@ -18,7 +18,7 @@ export function StackNavigatorLogOut() {
             initialRouteName={'LoginScreen'}
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: colors.dark.primary,
+                    backgroundColor: colors.dark.background,
                 },
                 headerTintColor: colors.light.white,
             }}>
