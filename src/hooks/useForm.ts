@@ -57,6 +57,7 @@ const useForm = (
         } else if (form === 'AddBill') {
             validateAddNewExpense();
         } else if (form === 'EditBill') {
+            validateEditBill();
         }
         // setErrors(formErrors);
 
@@ -214,6 +215,25 @@ const useForm = (
     };
 
     const validateAddNewExpense = () => {
+        if (!fields.amount) {
+            setErrors({
+                amount: 'Debes ingresar un monto',
+            });
+        } else if (!fields.comment) {
+            setErrors({
+                comment: 'Debes ingresar un comentario',
+            });
+        } else if (!fields.category) {
+            setErrors({
+                category: 'Debes seleccionar una categoria',
+            });
+        } else {
+            setErrors({});
+            onSubmit(fields);
+        }
+    };
+
+    const validateEditBill = () => {
         if (!fields.amount) {
             setErrors({
                 amount: 'Debes ingresar un monto',

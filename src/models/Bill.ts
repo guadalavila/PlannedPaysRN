@@ -10,7 +10,7 @@ export interface Bill {
 }
 
 export interface IBill {
-    id: number;
+    id: string;
     amount: number;
     currency: Currency;
     date: Date;

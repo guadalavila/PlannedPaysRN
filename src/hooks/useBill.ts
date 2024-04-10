@@ -1,4 +1,4 @@
-import { Bill } from '~models/Bill';
+import { Bill, IBill } from '~models/Bill';
 import firestore from '@react-native-firebase/firestore';
 import useAuth from './useAuth';
 import { getIdByDate } from '~utils/helpers';
@@ -11,12 +11,6 @@ function useBill() {
     const addBill = (bill: Bill) => {
         return new Promise(async (resolve, reject) => {
             try {
-                // const card = await firestore()
-                //     .collection('cards')
-                //     .add({
-                //         ...data,
-                //         email: user.email,
-                //     });
                 setIsLoading(true);
                 const id = getIdByDate();
                 const bill_ = await firestore()
@@ -36,6 +30,30 @@ function useBill() {
         });
     };
 
+    const editBill = async (bill: IBill) => {
+        try {
+            setIsLoading(true);
+            await firestore().collection(`bills_${user.email}`).doc(bill.id).update(bill);
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            console.log(error);
+        }
+    };
+
+    const deleteBill = async (id: string) => {
+        try {
+            setIsLoading(true);
+            const doc = firestore().collection(`bills_${user.email}`).doc(id);
+            await doc.delete();
+            setIsLoading(false);
+            console.log('Documento eliminado correctamente.');
+        } catch (error) {
+            setIsLoading(false);
+            console.error('Error al intentar eliminar el documento: ', error);
+        }
+    };
+
     const getBillsByMonth = async () => {
         return new Promise(async (resolve, reject) => {
             await firestore()
@@ -51,6 +69,6 @@ function useBill() {
         });
     };
 
-    return { addBill, isLoading, getBillsByMonth };
+    return { addBill, isLoading, getBillsByMonth, editBill, deleteBill };
 }
 export default useBill;
