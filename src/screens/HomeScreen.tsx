@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Dimensions, ScrollView } from 'react-native';
 import Card from '~components/Card';
@@ -15,6 +15,9 @@ import Fab from '~components/Fab';
 import Header from '~components/Header';
 import useBill from '~hooks/useBill';
 import LastBills from '~components/LastBills';
+import { RefreshControl } from 'react-native-gesture-handler';
+import { ThemeContext } from '~contexts/ThemeContext';
+import { IBill } from '~models/Bill';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'HomeScreen'> {}
 
@@ -22,10 +25,25 @@ const HomeScreen = ({ navigation }) => {
     const [loggedIn, setloggedIn] = useState(false);
     const [userInfo, setuserInfo] = useState([]);
     const { width, height } = Dimensions.get('window');
+    const [refreshing, setRefreshing] = useState(false);
+    const { themeApp } = useContext(ThemeContext);
+    const { getBillsByMonth } = useBill();
+    const [bills, setBills] = useState<IBill[]>([]);
 
-    // const { getBillsByMonth } = useBill();
     useEffect(() => {
-        // getBillsByMonth();
+        getBills();
+    }, []);
+
+    const getBills = (refresh: boolean = false) => {
+        getBillsByMonth().then((data) => {
+            setBills(data as IBill[]);
+            refresh && setRefreshing(false);
+        });
+    };
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        getBills(true);
     }, []);
 
     const data = [
@@ -82,12 +100,20 @@ const HomeScreen = ({ navigation }) => {
     return (
         <Container>
             <Header title='Home' />
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl
+                        tintColor={themeApp.colors.textInput}
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }>
                 <Card title='Tendencia de equilibrio'>
                     <Text>sdas</Text>
                     <Text>sdas</Text>
                 </Card>
-                <LastBills onPress={(bill) => navigation.navigate('BillDetailScreen', { bill: bill })} />
+                <LastBills bills={bills} onPress={(bill) => navigation.navigate('BillDetailScreen', { bill: bill })} />
                 {/* <PieChart
                     data={data}
                     width={width * 0.9}

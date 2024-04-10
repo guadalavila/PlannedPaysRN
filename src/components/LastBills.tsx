@@ -12,18 +12,19 @@ import { spacing } from '~utils/spacing';
 import { typography } from '~utils/typography';
 
 interface ILastBills {
+    bills: IBill[];
     onPress: (bill: IBill) => void;
 }
 
-const LastBills = ({ onPress }: ILastBills) => {
-    const [bills, setBills] = useState<IBill[]>([]);
-    const { getBillsByMonth } = useBill();
+const LastBills = ({ onPress, bills }: ILastBills) => {
+    // const [bills, setBills] = useState<IBill[]>([]);
+    // const { getBillsByMonth } = useBill();
 
-    useEffect(() => {
-        getBillsByMonth().then((data) => {
-            setBills(data as IBill[]);
-        });
-    }, []);
+    // useEffect(() => {
+    //     getBillsByMonth().then((data) => {
+    //         setBills(data as IBill[]);
+    //     });
+    // }, []);
 
     const getDate = (date: any) => {
         const current = new Date(date.seconds * 1000 + date.nanoseconds / 1000000);

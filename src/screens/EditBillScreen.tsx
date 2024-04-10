@@ -18,7 +18,7 @@ import { ISubCategory } from '~models/Category';
 import { CURRENCY_LIST } from '~utils/mock';
 import { spacing } from '~utils/spacing';
 
-const EditBillScreen = ({ route }) => {
+const EditBillScreen = ({ route, navigation }) => {
     const { fields, handleSubmit, errors, setFieldValue } = useForm('EditBill', () => doEdit());
     const refCategories = useRef();
     const refCurrency = useRef();
@@ -34,8 +34,9 @@ const EditBillScreen = ({ route }) => {
             currency: fields.currency,
             comment: fields.comment,
         };
-        editBill(bill).then(() => {});
-        console.log(bill);
+        editBill(bill).then(() => {
+            navigation.navigate('HomeScreen');
+        });
     };
 
     useEffect(() => {
@@ -44,10 +45,6 @@ const EditBillScreen = ({ route }) => {
         setFieldValue('category', route.params.bill.category);
         setFieldValue('currency', route.params.bill.currency);
     }, []);
-
-    useEffect(() => {
-        console.log(fields);
-    }, [fields]);
 
     return (
         <Container>

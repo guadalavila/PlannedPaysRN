@@ -27,7 +27,7 @@ const BillDetailScreen = ({ route, navigation }) => {
     };
 
     const doDelete = () => {
-        deleteBill(bill.id).then(() => navigation.goBack());
+        deleteBill(bill.id).then(() => navigation.navigate('HomeScreen'));
     };
 
     return (
