@@ -17,17 +17,20 @@ interface ItemProps {
     style?: StyleProp<ViewStyle> | undefined;
     fontAwesome?: boolean;
     showBorder?: boolean;
+    showIcon?: boolean;
 }
 
 const Item = ({
     text,
     onPress,
+
     icon = 'add',
     color = colors.light.primary,
     selected = false,
     style = {},
     fontAwesome = false,
     showBorder = false,
+    showIcon = true,
 }: ItemProps) => {
     const { themeApp } = useContext(ThemeContext);
     return (
@@ -41,13 +44,15 @@ const Item = ({
                 showBorder ? styles.border : null,
             ]}
             activeOpacity={0.7}>
-            <View style={[styles.avatar, { backgroundColor: color }]}>
-                {fontAwesome ? (
-                    <IconFA name={icon} size={18} color={colors.light.white} />
-                ) : (
-                    <Icon name={icon} size={18} color={colors.light.white} />
-                )}
-            </View>
+            {showIcon && (
+                <View style={[styles.avatar, { backgroundColor: color }]}>
+                    {fontAwesome ? (
+                        <IconFA name={icon} size={18} color={colors.light.white} />
+                    ) : (
+                        <Icon name={icon} size={18} color={colors.light.white} />
+                    )}
+                </View>
+            )}
             <Text style={[GlobalStyles.alignSelf, styles.text]}>{text}</Text>
             {selected && (
                 <View style={styles.containerCheck}>

@@ -1,6 +1,8 @@
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import AddNewExpense from '~screens/AddNewExpense';
-import AddTransactionScreen from '~screens/AddTransactionScreen';
+import AddBillScreen from '~screens/AddBillScreen';
+import BillDetailScreen from '~screens/BillDetailScreen';
+import EditBillScreen from '~screens/EditBillScreen';
 import HomeScreen from '~screens/HomeScreen';
 
 const Stack = createStackNavigator();
@@ -13,7 +15,9 @@ function HomeStack() {
                 headerShown: false,
             }}>
             <Stack.Screen name={'HomeScreen'} component={HomeScreen} />
-            <Stack.Screen name={'AddNewExpense'} component={AddNewExpense} />
+            <Stack.Screen name={'AddBillScreen'} component={AddBillScreen} />
+            <Stack.Screen name={'BillDetailScreen'} component={BillDetailScreen} />
+            <Stack.Screen name={'EditBillScreen'} component={EditBillScreen} />
         </Stack.Navigator>
     );
 }

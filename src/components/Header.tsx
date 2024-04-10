@@ -24,7 +24,7 @@ const Header = ({ title, showBack = false }: IHeaderProps) => {
             ) : (
                 <View style={styles.flex1} />
             )}
-            <View style={styles.flex1}>
+            <View style={[{ flex: 2 }]}>
                 <Text style={styles.title}>{title}</Text>
             </View>
             <View style={styles.flex1} />

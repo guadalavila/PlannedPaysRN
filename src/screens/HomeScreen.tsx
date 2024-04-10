@@ -13,15 +13,19 @@ import { encrypt } from '~utils/encrypt';
 import Text from '~components/Text';
 import Fab from '~components/Fab';
 import Header from '~components/Header';
+import useBill from '~hooks/useBill';
+import LastBills from '~components/LastBills';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'HomeScreen'> {}
 
-const HomeScreen = ({ navigation }: Props) => {
+const HomeScreen = ({ navigation }) => {
     const [loggedIn, setloggedIn] = useState(false);
     const [userInfo, setuserInfo] = useState([]);
     const { width, height } = Dimensions.get('window');
+
+    // const { getBillsByMonth } = useBill();
     useEffect(() => {
-        console.log(encrypt('123456'));
+        // getBillsByMonth();
     }, []);
 
     const data = [
@@ -83,6 +87,7 @@ const HomeScreen = ({ navigation }: Props) => {
                     <Text>sdas</Text>
                     <Text>sdas</Text>
                 </Card>
+                <LastBills onPress={(bill) => navigation.navigate('BillDetailScreen', { bill: bill })} />
                 {/* <PieChart
                     data={data}
                     width={width * 0.9}
@@ -94,10 +99,10 @@ const HomeScreen = ({ navigation }: Props) => {
                     // center={[10, 50]}
                     absolute
                 /> */}
-                <ProgressBar label='Compras' percent={30} />
+                {/* <ProgressBar label='Compras' percent={30} />
                 <ProgressBar label='Supermercado' percent={30} color={getColor()} />
-                <ProgressBar label='Compras' percent={30} color={getColor()} />
-                <LineChart
+                <ProgressBar label='Compras' percent={30} color={getColor()} /> */}
+                {/* <LineChart
                     title='Visa'
                     data={[100, 45, 28, 80, 99, 77]}
                     labels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']}
@@ -107,9 +112,9 @@ const HomeScreen = ({ navigation }: Props) => {
                     data={[100, 45, 28, 80, 99, 77]}
                     labels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']}
                     color='#F3780C'
-                />
+                /> */}
             </ScrollView>
-            <Fab icon='add' onPress={() => navigation.navigate('AddNewExpense')} />
+            <Fab icon='add' onPress={() => navigation.navigate('AddBillScreen')} />
         </Container>
     );
 };

@@ -1,4 +1,5 @@
 import { ICoin } from '~models/Coin';
+import { Currency } from './types/Currency';
 
 export const CATEGORIES = [
     { _id: 1, label: 'Comida', icon: 'fast-food', color: '#49BBA2' },
@@ -8,6 +9,13 @@ export const CATEGORIES = [
     { _id: 5, label: 'Restaurante', icon: 'restaurant', color: '#496A4C' },
     { _id: 6, label: 'Ropa', icon: 'shirt', color: '#0E5963' },
     { _id: 7, label: 'Facturas', icon: 'receipt', color: '#2C3A50' },
+];
+
+export const CURRENCY_LIST: Currency[] = [
+    { id: 1, label: 'EURO', currency: 'EUR' },
+    { id: 2, label: 'Dólar estadounidense', currency: 'USD' },
+    { id: 3, label: 'Peso Argentino', currency: 'ARS' },
+    { id: 4, label: 'Peso Mexicano', currency: 'MXN' },
 ];
 
 export const LIST_COLORS = [

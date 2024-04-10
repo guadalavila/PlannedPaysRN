@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { ICard } from '~models/Card';
-import { ICategory } from '~models/Category';
+import { ICategory, ISubCategory } from '~models/Category';
 
 export const RemoteConfigContext = React.createContext<{
     categories: ICategory[];
@@ -9,6 +9,8 @@ export const RemoteConfigContext = React.createContext<{
     setCards: React.Dispatch<ICard[]>;
     tokenLogin: string;
     setTokenLogin: React.Dispatch<string>;
+    subCategories: any;
+    setSubCategories: React.Dispatch<any>;
 }>({
     categories: [],
     setCategories: () => {},
@@ -16,6 +18,8 @@ export const RemoteConfigContext = React.createContext<{
     setCards: () => {},
     tokenLogin: '',
     setTokenLogin: () => {},
+    subCategories: [],
+    setSubCategories: () => {},
 });
 
 interface RemoteConfigContextProviderProps {
@@ -24,6 +28,7 @@ interface RemoteConfigContextProviderProps {
 
 export const RemoteConfigContextProvider: React.FC<RemoteConfigContextProviderProps> = ({ children }) => {
     const [categories, setCategories] = useState<ICategory[]>([]);
+    const [subCategories, setSubCategories] = useState<any>([]);
     const [cards, setCards] = useState<ICard[]>([]);
     const [token, setToken] = useState('');
 
@@ -31,6 +36,9 @@ export const RemoteConfigContextProvider: React.FC<RemoteConfigContextProviderPr
         setCategories(categories_);
     };
 
+    const setSubCategoriesApp = (categories_: ISubCategory[]) => {
+        setSubCategories(categories_);
+    };
     const setCards_ = (cards_: ICard[]) => {
         setCards(cards_);
     };
@@ -48,6 +56,8 @@ export const RemoteConfigContextProvider: React.FC<RemoteConfigContextProviderPr
                 setCards: setCards_,
                 tokenLogin: token,
                 setTokenLogin: setTokenLogin,
+                subCategories: subCategories,
+                setSubCategories: setSubCategoriesApp,
             }}>
             {children}
         </RemoteConfigContext.Provider>

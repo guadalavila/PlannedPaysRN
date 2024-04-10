@@ -24,6 +24,7 @@ import BottomSheetItem from '~components/BottomSheetItem';
 import ItemDate from '~components/ItemDate';
 import useCreditCard from '~hooks/useCreditCard';
 import { ITransaction } from '~models/Transaction';
+import Header from '~components/Header';
 
 interface Props extends NativeStackScreenProps<DrawerStackList, 'AddTransactionScreen'> {}
 const AddTransactionScreen = ({ route }: Props) => {
@@ -70,6 +71,7 @@ const AddTransactionScreen = ({ route }: Props) => {
     };
     return (
         <Container>
+            <Header title='Nueva Transacción' showBack />
             <ScrollView showsVerticalScrollIndicator={false}>
                 {card && (
                     <CreditCard colorsCard={card.colors} name={card.name} card={card.card} numbers={card.number} />
@@ -92,7 +94,6 @@ const AddTransactionScreen = ({ route }: Props) => {
                 <Input
                     value={fields.description}
                     placeholder='Descripción'
-                    isTextArea
                     keyboardType='default'
                     onChangeText={(value) => setFieldValue('description', value)}
                 />

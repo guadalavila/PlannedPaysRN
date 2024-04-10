@@ -5,7 +5,8 @@ import { RemoteConfigContext } from '~contexts/RemoteConfigContext';
 import { ICard } from '~models/Card';
 
 function useRemoteConfig() {
-    const { setCategories, setCards, setTokenLogin, categories } = useContext(RemoteConfigContext);
+    const { setCategories, setCards, setTokenLogin, categories, setSubCategories, subCategories } =
+        useContext(RemoteConfigContext);
 
     useEffect(() => {
         remoteConfig()
@@ -19,14 +20,16 @@ function useRemoteConfig() {
                     setTokenLogin(parameters.token_login.asString());
                     const cats = JSON.parse(parameters.categories.asString());
                     const cards = JSON.parse(parameters.cards.asString());
+                    const subCats = JSON.parse(parameters.subCategories.asString());
 
-                    const categories = cats.categories.map((category: ICategory) => ({
+                    const categories_ = cats.categories.map((category: ICategory) => ({
                         id: category.id,
                         color: category.color,
                         icon: category.icon,
                         label: category.label,
                     }));
-                    setCategories(categories);
+                    setCategories(categories_);
+                    setSubCategories(subCats);
                     const allCards = cards.cards.map((card: ICard) => ({
                         id: card.id,
                         brand: card.brand,
@@ -41,6 +44,6 @@ function useRemoteConfig() {
             });
     }, []);
 
-    return { categories };
+    return { categories, subCategories };
 }
 export default useRemoteConfig;

@@ -18,7 +18,15 @@ interface IUseFormReturn {
 }
 
 const useForm = (
-    form: 'NewCreditCard' | 'SignUpForm' | 'LoginForm' | 'UpdateUser' | 'NewGoalForm' | 'AddTransactionForm',
+    form:
+        | 'NewCreditCard'
+        | 'SignUpForm'
+        | 'LoginForm'
+        | 'UpdateUser'
+        | 'NewGoalForm'
+        | 'AddTransactionForm'
+        | 'AddBill'
+        | 'EditBill',
     onSubmit: (fields: IFormFields) => void,
 ): IUseFormReturn => {
     const { tokenLogin } = useContext(RemoteConfigContext);
@@ -46,6 +54,9 @@ const useForm = (
             validateNewGoalForm();
         } else if (form === 'AddTransactionForm') {
             validateAddTransaction();
+        } else if (form === 'AddBill') {
+            validateAddNewExpense();
+        } else if (form === 'EditBill') {
         }
         // setErrors(formErrors);
 
@@ -180,7 +191,6 @@ const useForm = (
     };
 
     const validateAddTransaction = () => {
-        console.log(fields);
         if (!fields.amount) {
             setErrors({
                 amount: 'Debes ingresar un monto',
@@ -202,6 +212,26 @@ const useForm = (
             onSubmit(fields);
         }
     };
+
+    const validateAddNewExpense = () => {
+        if (!fields.amount) {
+            setErrors({
+                amount: 'Debes ingresar un monto',
+            });
+        } else if (!fields.comment) {
+            setErrors({
+                comment: 'Debes ingresar un comentario',
+            });
+        } else if (!fields.category) {
+            setErrors({
+                category: 'Debes seleccionar una categoria',
+            });
+        } else {
+            setErrors({});
+            onSubmit(fields);
+        }
+    };
+
     return {
         fields,
         errors,
